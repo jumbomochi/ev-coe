@@ -1,0 +1,16 @@
+{
+  "source": "https://www.mas.gov.sg/news/media-releases/2016/mas-eases-rules-on-motor-vehicle-financing",
+  "checked": "2026-10-31",
+  "note": "Loan-to-value applies to the purchase price (including COE and taxes).",
+  "periods": [
+    {
+      "id": "mas-2016",
+      "from": "2016-05-27",
+      "to": null,
+      "omvThreshold": 20000,
+      "ltvAtOrBelowThreshold": 0.7,
+      "ltvAboveThreshold": 0.6,
+      "maxTenureMonths": 84
+    }
+  ]
+}

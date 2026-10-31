@@ -1,0 +1,35 @@
+{
+  "sources": [
+    "https://onemotoring.lta.gov.sg/content/onemotoring/home/buying/upfront-vehicle-costs/tax-structure.html",
+    "https://www.lta.gov.sg/content/ltagov/en/newsroom/2025/9/news-releases/extension_of_ves_and_eeai_to_support_vehicle_electrification.html"
+  ],
+  "checked": "2026-10-31",
+  "note": "Keyed by registration date of the new car. Rebates (negative) offset ARF down to the minimum ARF; surcharges are paid separately and never count towards PARF. No scheme has been announced after 31 Dec 2027: the app labels that period as assumed.",
+  "periods": [
+    {
+      "id": "ves-2026",
+      "from": "2026-01-01",
+      "to": "2026-12-31",
+      "ves": { "A": -22500, "B": 0, "C1": 7500, "C2": 22500, "C3": 35000 },
+      "eeai": { "rate": 0.45, "capDollars": 7500 },
+      "minimumArf": { "electric": 0, "other": 5000 }
+    },
+    {
+      "id": "ves-2027",
+      "from": "2027-01-01",
+      "to": "2027-12-31",
+      "ves": { "A": -20000, "B": 0, "C1": 15000, "C2": 30000, "C3": 45000 },
+      "eeai": null,
+      "minimumArf": { "electric": 0, "other": 5000 }
+    },
+    {
+      "id": "unannounced-from-2028",
+      "from": "2028-01-01",
+      "to": null,
+      "assumed": true,
+      "ves": { "A": 0, "B": 0, "C1": 0, "C2": 0, "C3": 0 },
+      "eeai": null,
+      "minimumArf": { "electric": 0, "other": 0 }
+    }
+  ]
+}

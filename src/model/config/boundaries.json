@@ -1,0 +1,23 @@
+{
+  "note": "COE category rule changes inside the backtest period. Chart lines never join across these; backtest windows that span one affecting the user's category and powertrain are drawn hollow.",
+  "boundaries": [
+    {
+      "id": "cat-a-power-criterion",
+      "label": "Cat A adds a ≤97kW power limit",
+      "exercise": { "month": "2014-02", "bidding": 1 },
+      "categories": ["A", "B"],
+      "electricOnly": false,
+      "confirmed": false,
+      "source": "LTA 2013 COE category review; effective exercise to confirm on lta.gov.sg"
+    },
+    {
+      "id": "ev-power-criterion",
+      "label": "EVs above 110kW move to Cat B",
+      "exercise": { "month": "2022-05", "bidding": 1 },
+      "categories": ["A", "B"],
+      "electricOnly": true,
+      "confirmed": true,
+      "source": "https://onemotoring.lta.gov.sg/content/onemotoring/home/buying/upfront-vehicle-costs/certificate-of-entitlement--coe-.html"
+    }
+  ]
+}

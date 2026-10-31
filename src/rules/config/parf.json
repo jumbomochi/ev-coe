@@ -1,0 +1,49 @@
+{
+  "source": "https://onemotoring.lta.gov.sg/content/onemotoring/home/buying/rebates/parf-coe-rebate.html",
+  "checked": "2026-10-31",
+  "note": "Schedule is chosen by the bidding exercise the COE was obtained in. Age counts from the original registration date; a car more than 10 years old gets no PARF.",
+  "schedules": [
+    {
+      "id": "pre-feb-2023",
+      "fromExercise": null,
+      "toExercise": { "month": "2023-02", "bidding": 1 },
+      "capDollars": null,
+      "tiers": [
+        { "maxAgeYears": 5, "rate": 0.75 },
+        { "maxAgeYears": 6, "rate": 0.70 },
+        { "maxAgeYears": 7, "rate": 0.65 },
+        { "maxAgeYears": 8, "rate": 0.60 },
+        { "maxAgeYears": 9, "rate": 0.55 },
+        { "maxAgeYears": 10, "rate": 0.50 }
+      ]
+    },
+    {
+      "id": "feb-2023-to-feb-2026",
+      "fromExercise": { "month": "2023-02", "bidding": 2 },
+      "toExercise": { "month": "2026-02", "bidding": 1 },
+      "capDollars": 60000,
+      "tiers": [
+        { "maxAgeYears": 5, "rate": 0.75 },
+        { "maxAgeYears": 6, "rate": 0.70 },
+        { "maxAgeYears": 7, "rate": 0.65 },
+        { "maxAgeYears": 8, "rate": 0.60 },
+        { "maxAgeYears": 9, "rate": 0.55 },
+        { "maxAgeYears": 10, "rate": 0.50 }
+      ]
+    },
+    {
+      "id": "from-feb-2026",
+      "fromExercise": { "month": "2026-02", "bidding": 2 },
+      "toExercise": null,
+      "capDollars": 30000,
+      "tiers": [
+        { "maxAgeYears": 5, "rate": 0.30 },
+        { "maxAgeYears": 6, "rate": 0.25 },
+        { "maxAgeYears": 7, "rate": 0.20 },
+        { "maxAgeYears": 8, "rate": 0.15 },
+        { "maxAgeYears": 9, "rate": 0.10 },
+        { "maxAgeYears": 10, "rate": 0.05 }
+      ]
+    }
+  ]
+}

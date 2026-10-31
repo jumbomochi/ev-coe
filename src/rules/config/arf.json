@@ -1,0 +1,30 @@
+{
+  "source": "https://onemotoring.lta.gov.sg/content/onemotoring/home/buying/upfront-vehicle-costs/tax-structure.html",
+  "checked": "2026-10-31",
+  "note": "ARF is a marginal percentage of OMV. Tiers are chosen by the bidding exercise the COE was obtained in.",
+  "schedules": [
+    {
+      "id": "pre-feb-2023",
+      "fromExercise": null,
+      "toExercise": { "month": "2023-02", "bidding": 1 },
+      "brackets": [
+        { "upToOmv": 20000, "rate": 1.0 },
+        { "upToOmv": 50000, "rate": 1.4 },
+        { "upToOmv": 80000, "rate": 1.8 },
+        { "upToOmv": null, "rate": 2.2 }
+      ]
+    },
+    {
+      "id": "from-feb-2023",
+      "fromExercise": { "month": "2023-02", "bidding": 2 },
+      "toExercise": null,
+      "brackets": [
+        { "upToOmv": 20000, "rate": 1.0 },
+        { "upToOmv": 40000, "rate": 1.4 },
+        { "upToOmv": 60000, "rate": 1.9 },
+        { "upToOmv": 80000, "rate": 2.5 },
+        { "upToOmv": null, "rate": 3.2 }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "name": "ev-coe",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "When should you replace your car? COE supply, renew-vs-replace and plan backtests for Singapore car owners.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "fetch-data": "tsx scripts/fetch-data.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "fflate": "^0.8.3",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.5",
+    "vitest": "^5.0.5"
+  },
+  "dependencies": {
+    "@observablehq/plot": "^0.6.17"
+  }
+}
