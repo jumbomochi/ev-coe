@@ -1,73 +1,195 @@
 {
   "source": "LTA, Cost for New Cars Registered in Sep 2026 (selling prices quoted by authorised distributors): https://onemotoring.lta.gov.sg/content/dam/onemotoring/Buying/Car_Cost_Update/M032-Car_Cost_Update.pdf",
   "edition": "2026-09",
-  "note": "Hand-entered from one edition (TODOS.md tracks automating this). Prices exclude COE; the app adds the latest premium for the category.",
+  "note": "Hand-entered from one edition (TODOS.md tracks automating this). priceWithCoe is the distributor's with-COE quote (column 20); null where LTA lists none. The app moves it by the change in the category's premium since quotePremiums (column 14, the edition's 1st bidding). ltaModel ties each preset to its row in src/fixtures/lta-car-cost-2026-09.json.",
+  "quotePremiums": { "A": 133009, "B": 135001 },
   "presets": [
     {
       "id": "honda-hrv-15-dx-sin",
       "label": "Honda HR-V 1.5 DX",
+      "ltaModel": "HONDA HRV 1.5 DX-SIN",
       "powertrain": "petrol",
       "category": "A",
       "band": "C1",
       "electric": false,
       "omv": 16722,
-      "priceWithoutCoe": 73899,
-      "priceWithCoeSep2026": 199899
+      "priceWithCoe": 199899
     },
     {
       "id": "toyota-corolla-altis-16-standard",
       "label": "Toyota Corolla Altis 1.6",
+      "ltaModel": "TOYOTA COROLLA ALTIS 1.6 STANDARD",
       "powertrain": "petrol",
       "category": "A",
       "band": "C1",
       "electric": false,
       "omv": 19185,
-      "priceWithoutCoe": 72998,
-      "priceWithCoeSep2026": 204888
+      "priceWithCoe": 204888
     },
     {
       "id": "honda-jazz-15-crosstar-ehev",
       "label": "Honda Jazz Crosstar e:HEV",
+      "ltaModel": "HONDA JAZZ 1.5 CROSSTAR E:HEV",
       "powertrain": "hybrid",
       "category": "A",
       "band": "B",
       "electric": false,
       "omv": 17796,
-      "priceWithoutCoe": 67899,
-      "priceWithCoeSep2026": 193899
+      "priceWithCoe": 193899
     },
     {
       "id": "kia-niro-hybrid-air",
       "label": "Kia Niro Hybrid",
+      "ltaModel": "KIA NIRO HYBRID AIR",
       "powertrain": "hybrid",
       "category": "A",
       "band": "B",
       "electric": false,
       "omv": 21167,
-      "priceWithoutCoe": 75999,
-      "priceWithCoeSep2026": 205999
+      "priceWithCoe": 205999
+    },
+    {
+      "id": "byd-seal-6-dynamic-dmi",
+      "label": "BYD Seal 6 DM-i Dynamic",
+      "ltaModel": "BYD SEAL 6 DYNAMIC DM-I",
+      "powertrain": "plug-in hybrid",
+      "category": "B",
+      "band": "B",
+      "electric": false,
+      "omv": 18900,
+      "priceWithCoe": 266388
+    },
+    {
+      "id": "byd-sealion-6-dmi",
+      "label": "BYD Sealion 6 DM-i",
+      "ltaModel": "BYD SEALION 6 DMI",
+      "powertrain": "plug-in hybrid",
+      "category": "B",
+      "band": "B",
+      "electric": false,
+      "omv": 24850,
+      "priceWithCoe": 280388
+    },
+    {
+      "id": "jaecoo-7-phev",
+      "label": "Jaecoo J7 PHEV",
+      "ltaModel": "CHERY JAECOO7 PHEV",
+      "powertrain": "plug-in hybrid",
+      "category": "B",
+      "band": "B",
+      "electric": false,
+      "omv": 27720,
+      "priceWithCoe": null
+    },
+    {
+      "id": "byd-atto-1",
+      "label": "BYD Atto 1",
+      "ltaModel": "BYD ATTO 1",
+      "powertrain": "electric",
+      "category": "A",
+      "band": "A",
+      "electric": true,
+      "omv": 14388,
+      "priceWithCoe": 238888
+    },
+    {
+      "id": "byd-atto-2-premium",
+      "label": "BYD Atto 2 Premium",
+      "ltaModel": "BYD ATTO 2 PREMIUM",
+      "powertrain": "electric",
+      "category": "A",
+      "band": "A",
+      "electric": true,
+      "omv": 22036,
+      "priceWithCoe": 245888
+    },
+    {
+      "id": "byd-atto-3-evo-dynamic",
+      "label": "BYD Atto 3 EVO Dynamic",
+      "ltaModel": "BYD ATTO 3 EVO DYNAMIC",
+      "powertrain": "electric",
+      "category": "A",
+      "band": "A",
+      "electric": true,
+      "omv": 26206,
+      "priceWithCoe": 256888
+    },
+    {
+      "id": "byd-m6-7-seater",
+      "label": "BYD M6 7-seater",
+      "ltaModel": "BYD M6 7-SEATER(ER)",
+      "powertrain": "electric",
+      "category": "A",
+      "band": "A",
+      "electric": true,
+      "omv": 28661,
+      "priceWithCoe": 259888
+    },
+    {
+      "id": "byd-seal-dynamic",
+      "label": "BYD Seal Dynamic",
+      "ltaModel": "BYD SEAL DYNAMIC 100KW",
+      "powertrain": "electric",
+      "category": "A",
+      "band": "A",
+      "electric": true,
+      "omv": 34508,
+      "priceWithCoe": 271888
+    },
+    {
+      "id": "byd-sealion-7-dynamic",
+      "label": "BYD Sealion 7 Dynamic",
+      "ltaModel": "BYD SEALION 7 DYNAMIC",
+      "powertrain": "electric",
+      "category": "A",
+      "band": "A",
+      "electric": true,
+      "omv": 35618,
+      "priceWithCoe": 274388
+    },
+    {
+      "id": "jaecoo-5-ev",
+      "label": "Jaecoo J5 EV",
+      "ltaModel": "CHERY JAECOO 5 BEV 2WD 155KW",
+      "powertrain": "electric",
+      "category": "B",
+      "band": "A",
+      "electric": true,
+      "omv": 24339,
+      "priceWithCoe": null
+    },
+    {
+      "id": "jaecoo-6-ev",
+      "label": "Jaecoo J6 EV",
+      "ltaModel": "CHERY JAECOO6 EV 2WD 99KW",
+      "powertrain": "electric",
+      "category": "A",
+      "band": "A",
+      "electric": true,
+      "omv": 27271,
+      "priceWithCoe": null
     },
     {
       "id": "honda-super-one-ev",
       "label": "Honda Super-One EV",
+      "ltaModel": "HONDA SUPER-ONE EV",
       "powertrain": "electric",
       "category": "A",
       "band": "A",
       "electric": true,
       "omv": 24033,
-      "priceWithoutCoe": 70899,
-      "priceWithCoeSep2026": 196899
+      "priceWithCoe": 196899
     },
     {
       "id": "kia-ev5-earth-long-range",
       "label": "Kia EV5 Earth Long Range",
+      "ltaModel": "KIA EV5 EARTH LONG RANGE",
       "powertrain": "electric",
       "category": "A",
       "band": "A",
       "electric": true,
       "omv": 33028,
-      "priceWithoutCoe": 97999,
-      "priceWithCoeSep2026": 227999
+      "priceWithCoe": 227999
     }
   ]
 }

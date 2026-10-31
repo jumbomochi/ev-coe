@@ -3,7 +3,7 @@ import { exerciseForDate, rulesAt, type CurrentCar } from "./index";
 import { unusedCoeMonths } from "./coeRebate";
 import { grossArf } from "./arf";
 import type { EmissionBand } from "./types";
-import lta from "./fixtures/lta-car-cost-2026-09.json";
+import lta from "../fixtures/lta-car-cost-2026-09.json";
 import bankRates from "../ui/config/bank-rates.json";
 
 const rules = rulesAt("2026-10-31");
