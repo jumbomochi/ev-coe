@@ -8,12 +8,16 @@
  *   registrations(m − 120) × (1 − renewal share)  →  expected deregistrations(m)
  *   0.25 × Σ deregistrations over the 12 months ending 2 months before the quarter  →  formula quota
  *
+ * Cat A and Cat B each follow the formula on their own deregistrations (checked 2023-26: both sit
+ * at the same ratio to it as the total). Cat E, open to either, takes about a tenth of the car
+ * quota out of both, so a single category's actual quota runs below its formula line.
+ *
  * Not included (stated on the chart): returns from 5-year renewals (year 15), 10-year renewals
  * (year 20) and early deregistrations.
  */
 import type { CoeResult, MonthlyCount, Revalidation } from "./data";
 
-const CARS = new Set(["Category A", "Category B"]);
+export type SupplyCategory = "A" | "B";
 const FORMULA_SHARE = 0.25;
 /** Quarters start in Feb, May, Aug and Nov; LTA counts deregistrations up to 2 months before. */
 const QUARTER_START_MONTHS = ["02", "05", "08", "11"];
@@ -39,7 +43,7 @@ export interface RadarMonth {
 
 export interface RadarQuarter {
   quarterStart: string;
-  /** Actual Cat A+B+E quota across the quarter's exercises, if published. */
+  /** Actual quota across the quarter's exercises (Cat A+B+E, or the one category), if published. */
   actualQuota?: number;
   /** Formula quota using actual deregistrations where known, expected ones after. */
   formulaQuota?: Band;
@@ -64,9 +68,9 @@ export function addMonths(month: string, k: number): string {
   return `${Math.floor(t / 12)}-${String((t % 12) + 1).padStart(2, "0")}`;
 }
 
-function monthlyCars(rows: { month: string; category: string; number: number }[]): Map<string, number> {
+function monthlyCars(rows: { month: string; category: string; number: number }[], categories: Set<string>): Map<string, number> {
   const out = new Map<string, number>();
-  for (const r of rows) if (CARS.has(r.category)) out.set(r.month, (out.get(r.month) ?? 0) + r.number);
+  for (const r of rows) if (categories.has(r.category)) out.set(r.month, (out.get(r.month) ?? 0) + r.number);
   return out;
 }
 
@@ -81,10 +85,14 @@ export function radar(input: {
   coe: CoeResult[];
   /** Last month to project to. */
   untilMonth: string;
+  /** One COE category's supply; all cars (Cat A+B, quota A+B+E) when omitted. */
+  category?: SupplyCategory;
 }): Radar {
-  const reg = monthlyCars(input.registrations);
-  const dereg = monthlyCars(input.deregistrations);
-  const reval = monthlyCars(input.revalidations);
+  const cats = new Set(input.category ? [`Category ${input.category}`] : ["Category A", "Category B"]);
+  const quotaCats = new Set(input.category ? [input.category] : ["A", "B", "E"]);
+  const reg = monthlyCars(input.registrations, cats);
+  const dereg = monthlyCars(input.deregistrations, cats);
+  const reval = monthlyCars(input.revalidations, cats);
   const cohort = (m: string) => reg.get(addMonths(m, -120));
 
   // Renewal share: revalidations ÷ expiring cohort, over the latest SHARE_WINDOW months with both.
@@ -110,7 +118,7 @@ export function radar(input: {
 
   const quotaByMonth = new Map<string, number>();
   for (const r of input.coe) {
-    if (r.category === "A" || r.category === "B" || r.category === "E") quotaByMonth.set(r.month, (quotaByMonth.get(r.month) ?? 0) + r.quota);
+    if (quotaCats.has(r.category)) quotaByMonth.set(r.month, (quotaByMonth.get(r.month) ?? 0) + r.quota);
   }
 
   const quarters: RadarQuarter[] = [];

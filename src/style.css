@@ -9,6 +9,10 @@
   --warn: #a35a00;
   --error: #b42318;
   --estimate-bg: #fff6e5;
+  /* Chart series, fixed by COE category (validated: dataviz validate_palette.js, light and dark). */
+  --s1: #2a78d6;
+  --s2: #eb6834;
+  --s3: #1baf7a;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
@@ -23,6 +27,9 @@
     --warn: #f0a640;
     --error: #ff8a80;
     --estimate-bg: #2e2614;
+    --s1: #3987e5;
+    --s2: #d95926;
+    --s3: #199e70;
     color-scheme: dark;
   }
 }
@@ -86,6 +93,16 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 4px 0; width: 100%; }
 .sw.band { background: var(--accent); opacity: 0.25; }
 .sw.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ink); }
 .sw.tick { width: 3px; height: 12px; background: var(--warn); }
+.sw.s-A { background: var(--s1); border-color: var(--s1); }
+.sw.s-B { background: var(--s2); border-color: var(--s2); }
+.sw.s-E { background: var(--s3); border-color: var(--s3); }
+.sw.line.s-A, .sw.line.s-B, .sw.line.s-E { background: none; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; margin: 8px 0 12px; }
+.tile { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
+.tile.mine { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+.tile .kicker { display: flex; align-items: center; gap: 6px; margin-top: 0; }
+.tile .sub { margin: 2px 0 4px; }
+.badge { margin-left: auto; font-size: 0.7rem; color: var(--accent); font-weight: 600; }
 .sw.window { background: var(--accent); opacity: 0.12; border: 1px solid var(--accent); }
 
 .strip { border-top: 1px solid var(--line); padding-top: 4px; }

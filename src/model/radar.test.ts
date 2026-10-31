@@ -60,3 +60,26 @@ describe("radar", () => {
     expect(r.hindcast.cohortModelMonths).toBe(months("2024-01", "2026-09").length);
   });
 });
+
+describe("radar by category (real DataMall snapshot)", async () => {
+  const { data } = await import("../ui/data");
+  const input = { registrations: data.registrations.rows, deregistrations: data.deregistrations.rows, revalidations: data.revalidations.rows, coe: data.coe.rows, untilMonth: "2030-12" };
+  const all = radar(input);
+  const a = radar({ ...input, category: "A" });
+  const b = radar({ ...input, category: "B" });
+  const at = (x: typeof all, q: string) => x.quarters.find((r) => r.quarterStart === q)!;
+
+  it("splits the formula exactly where it comes from actual deregistrations", () => {
+    const q = all.quarters.filter((r) => r.formulaFromActuals && r.quarterStart >= "2023-02");
+    expect(q.length).toBeGreaterThan(10);
+    for (const r of q) expect(at(a, r.quarterStart).formulaQuota!.mid + at(b, r.quarterStart).formulaQuota!.mid).toBeCloseTo(r.formulaQuota!.mid, 6);
+  });
+
+  it("reports each category's own actual quota, with Cat E only in the total", () => {
+    const q = "2026-08";
+    const quota = (cat: string) => data.coe.rows.filter((r) => r.category === cat && r.month >= q && r.month <= "2026-10").reduce((s, r) => s + r.quota, 0);
+    expect(at(a, q).actualQuota).toBe(quota("A"));
+    expect(at(b, q).actualQuota).toBe(quota("B"));
+    expect(at(all, q).actualQuota).toBe(quota("A") + quota("B") + quota("E"));
+  });
+});

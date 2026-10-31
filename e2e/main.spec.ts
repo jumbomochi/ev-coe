@@ -65,3 +65,27 @@ test("Clear my car forgets the profile after a reload", async ({ page }) => {
   await page.reload();
   await expect(page.locator("input[name=arfPaid]")).toHaveValue("");
 });
+
+test("COE categories: premiums by category, and supply follows the next car's category", async ({ page }) => {
+  const s2 = page.locator("section[aria-labelledby=s2]");
+  await expect(s2.locator(".tile")).toHaveCount(3);
+  await expect(s2.locator(".tile.mine")).toContainText("Cat A");
+  await expect(s2.locator(".tile.mine")).toContainText("$132,004");
+  await expect(s2.locator(".lede")).toContainText("Cat A COEs");
+
+  await page.locator("section[aria-labelledby=s3] select").first().selectOption("byd-sealion-6-dmi");
+  await expect(s2.locator(".tile.mine")).toContainText("Cat B");
+  await expect(s2.locator(".lede")).toContainText("Cat B COEs");
+  await s2.getByRole("radio", { name: "All cars" }).click();
+  await expect(s2.locator(".lede")).toContainText("car COEs");
+});
+
+test("a car LTA lists without a price asks for a dealer quote", async ({ page }) => {
+  const s3 = page.locator("section[aria-labelledby=s3]");
+  await s3.locator("select").first().selectOption("jaecoo-6-ev");
+  await expect(s3.locator(".results")).toContainText("Enter a dealer's quote");
+  await expect(s3.locator(".results")).toContainText("Enter the car's price to work out the loan");
+  await fill(page, "quotedPrice", "215,888");
+  await expect(s3.locator(".results .big").first()).toHaveText("$215,888");
+  await expect(s3.locator(".results")).toContainText("a month");
+});

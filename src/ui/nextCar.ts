@@ -126,7 +126,7 @@ export function nextCarSection(state: NextCarState, rules: RuleSet, purchaseDate
       field("Car", presetSelect, undefined, `Prices from LTA's ${presets.edition} table of distributor quotes.`),
       field(
         f.preset.priceWithCoe === null ? "Price you were quoted" : "Price you were quoted (optional)",
-        h("input", { type: "text", inputmode: "numeric", placeholder: f.price === undefined ? "e.g. 250,000" : "", value: state.quotedPrice, onchange: (e: Event) => set("quotedPrice", (e.target as HTMLInputElement).value) }),
+        h("input", { type: "text", name: "quotedPrice", inputmode: "numeric", placeholder: f.price === undefined ? "e.g. 250,000" : "", value: state.quotedPrice, onchange: (e: Event) => set("quotedPrice", (e.target as HTMLInputElement).value) }),
         undefined,
         f.preset.priceWithCoe === null ? `With COE. LTA's ${presets.edition} table has no distributor price for this car.` : "With COE. Replaces the estimate from LTA's table.",
       ),

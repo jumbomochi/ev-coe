@@ -7,7 +7,8 @@ import { data, history, latestExercise } from "./ui/data";
 import { clearProfile, loadProfile, saveProfile, validateCar, type Profile } from "./ui/profile";
 import { staleness } from "./ui/stale";
 import { yourCarForm, yourCarResults } from "./ui/yourCar";
-import { supplySection } from "./ui/supply";
+import { supplySection, type SupplyView } from "./ui/supply";
+import { premiumsSection } from "./ui/premiums";
 import { defaultNextCar, nextCarFigures, nextCarSection, presetById, type NextCarState } from "./ui/nextCar";
 import { plansSection } from "./ui/plans";
 
@@ -20,16 +21,22 @@ function todayInSingapore(): string {
 
 const today = todayInSingapore();
 const rules = rulesAt(today);
-const supply = radar({
+const radarInput = {
   registrations: data.registrations.rows,
   deregistrations: data.deregistrations.rows,
   revalidations: data.revalidations.rows,
   coe: data.coe.rows,
   untilMonth: "2030-12",
-});
+};
+const supply: Record<SupplyView, ReturnType<typeof radar>> = {
+  all: radar(radarInput),
+  A: radar({ ...radarInput, category: "A" }),
+  B: radar({ ...radarInput, category: "B" }),
+};
 
 const loaded = loadProfile();
-const state: { profile: Profile; nextCar: NextCarState; remembered: boolean } = {
+// supplyView: undefined follows the next car's category until the visitor picks one.
+const state: { profile: Profile; nextCar: NextCarState; remembered: boolean; supplyView?: SupplyView } = {
   profile: loaded.profile,
   nextCar: defaultNextCar(),
   remembered: loaded.remembered,
@@ -51,6 +58,7 @@ function render(): void {
 
   const next = nextCarFigures(state.nextCar, rules, purchaseDate);
   const preset = presetById(state.nextCar.presetId);
+  const nextCategory = preset.category as "A" | "B";
   const strips =
     p.mode === "first" || valid
       ? backtest({
@@ -87,7 +95,13 @@ function render(): void {
         state.remembered ? h("button", { type: "button", class: "link", onclick: () => clearCar() }, "Clear my car") : null,
       ),
     ),
-    h("section", { class: "card", "aria-labelledby": "s2" }, h("h2", { id: "s2" }, "COE supply in your window"), supplySection(supply, window, width - 48)),
+    h(
+      "section",
+      { class: "card", "aria-labelledby": "s2" },
+      h("h2", { id: "s2" }, "COE premiums and supply in your window"),
+      premiumsSection(nextCategory, window, width - 48),
+      supplySection(supply, state.supplyView ?? nextCategory, (supplyView) => update({ supplyView }), window, width - 48),
+    ),
     h("section", { class: "card", "aria-labelledby": "s3" }, h("h2", { id: "s3" }, "Your next car"), nextCarSection(state.nextCar, rules, purchaseDate, (nextCar) => update({ nextCar }))),
     h(
       "section",

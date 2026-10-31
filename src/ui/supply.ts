@@ -1,6 +1,6 @@
 /** Section 2: COE supply in your window. */
 import * as Plot from "@observablehq/plot";
-import type { Radar } from "../model/radar";
+import type { Radar, SupplyCategory } from "../model/radar";
 import { h, monthLabel, source } from "./dom";
 import markers from "./config/markers.json";
 
@@ -9,7 +9,17 @@ const FORMULA_SINCE = "2023-02";
 const toDate = (month: string) => new Date(`${month}-01T00:00:00Z`);
 const isoToDate = (iso: string) => new Date(`${iso}T00:00:00Z`);
 
-export function supplySection(radar: Radar, window: { from: string; to: string } | undefined, width: number): HTMLElement {
+export type SupplyView = SupplyCategory | "all";
+
+export function supplySection(
+  radars: Record<SupplyView, Radar>,
+  view: SupplyView,
+  onView: (v: SupplyView) => void,
+  window: { from: string; to: string } | undefined,
+  width: number,
+): HTMLElement {
+  const radar = radars[view];
+  const what = view === "all" ? "car COEs" : `Cat ${view} COEs`;
   const quarters = radar.quarters.filter((q) => q.quarterStart >= "2018-02");
   const projected = quarters.filter((q) => q.formulaQuota && !q.formulaFromActuals);
   // LTA has used the 12-month formula since Feb 2023; before that, quotas followed the previous quarter.
@@ -41,20 +51,30 @@ export function supplySection(radar: Radar, window: { from: string; to: string }
     height: 320,
     marginLeft: 56,
     x: { type: "utc", label: null },
-    y: { label: "Car COEs per quarter (Cat A+B+E)", grid: false, tickFormat: "~s" },
+    y: { label: view === "all" ? "Car COEs per quarter (Cat A+B+E)" : `Cat ${view} COEs per quarter`, grid: false, tickFormat: "~s" },
     style: { background: "transparent", color: "var(--ink)", fontSize: "12px" },
     marks,
   });
 
+  const toggle = h(
+    "div",
+    { class: "toggle small", role: "radiogroup", "aria-label": "COE category" },
+    ...(["A", "B", "all"] as const).map((v) =>
+      h("button", { type: "button", role: "radio", "aria-checked": view === v ? "true" : "false", class: view === v ? "on" : "", onclick: () => onView(v) }, v === "all" ? "All cars" : `Cat ${v}`),
+    ),
+  );
+
   return h(
     "div",
     {},
+    h("h3", {}, "COE supply"),
+    toggle,
     h(
       "p",
       { class: "lede" },
       "Cars registered in the 2016-18 wave reach 10 years in 2026-28. More COEs come back, unless owners renew. ",
       peak && lastActual
-        ? `LTA's formula puts supply at about ${Math.round(peak.formulaQuota!.mid).toLocaleString("en-SG")} a quarter at the peak (${monthLabel(peak.quarterStart)}), against ${lastActual.quota.toLocaleString("en-SG")} in the latest quarter.`
+        ? `LTA's formula puts ${what} at about ${Math.round(peak.formulaQuota!.mid).toLocaleString("en-SG")} a quarter at the peak (${monthLabel(peak.quarterStart)}), against ${lastActual.quota.toLocaleString("en-SG")} in the latest quarter.`
         : null,
     ),
     h("figure", { class: "chart" }, chart),
@@ -70,7 +90,9 @@ export function supplySection(radar: Radar, window: { from: string; to: string }
     h(
       "p",
       { class: "note" },
-      "The gap between the formula and actual quota is LTA's own adjustment: COEs brought forward in 2023-25 and an extra ~20,000 from 2025 pushed quotas above the formula; from 2026 the brought-forward COEs are paid back, pulling them below it. ",
+      view === "all" ? "" : `Cat E takes about a tenth of the car quota out of both categories, so Cat ${view}'s actual quota sits below its formula line. `,
+      view === "all" ? "The gap between the formula and actual quota is LTA's own adjustment:" : "The rest of the gap is LTA's own adjustment:",
+      " COEs brought forward in 2023-25 and an extra ~20,000 from 2025 pushed quotas above the formula; from 2026 the brought-forward COEs are paid back, pulling them below it. ",
       `Not included: COEs returning from 5- and 10-year renewals or early deregistrations. Projecting deregistrations from 10-year-old cohorts has been off by ${Math.round(radar.hindcast.cohortModelError * 100)}% on average over the last ${radar.hindcast.cohortModelMonths} months.`,
     ),
     h(
