@@ -108,7 +108,7 @@ function render(): void {
       { class: "card", "aria-labelledby": "s4" },
       h("h2", { id: "s4" }, p.mode === "first" ? "What buying in your month has cost" : "What each plan would have cost someone with your deadline"),
       strips.length
-        ? plansSection(strips, width - 48, `${preset.label}, OMV $${next.omv.toLocaleString("en-SG")}`)
+        ? plansSection(strips, width - 48, `${preset.label}, OMV $${next.omv.toLocaleString("en-SG")}`, { category: nextCategory, today, deadline })
         : h("p", { class: "results empty" }, "Fill in your car above to replay the plans."),
     ),
     h(

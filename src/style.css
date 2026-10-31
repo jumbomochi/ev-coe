@@ -13,6 +13,9 @@
   --s1: #2a78d6;
   --s2: #eb6834;
   --s3: #1baf7a;
+  /* Plan lines in section 4 (validated with the same script). */
+  --p1: #6250d6;
+  --p2: #eda100;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
@@ -30,6 +33,8 @@
     --s1: #3987e5;
     --s2: #d95926;
     --s3: #199e70;
+    --p1: #9085e9;
+    --p2: #c98500;
     color-scheme: dark;
   }
 }
@@ -97,6 +102,12 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 4px 0; width: 100%; }
 .sw.s-B { background: var(--s2); border-color: var(--s2); }
 .sw.s-E { background: var(--s3); border-color: var(--s3); }
 .sw.line.s-A, .sw.line.s-B, .sw.line.s-E { background: none; }
+.sw.line.p1 { border-color: var(--p1); }
+.sw.line.p2 { border-color: var(--p2); }
+.sw.line.accent { border-color: var(--accent); }
+.sw.zero { border-top: 1px solid var(--muted); height: 0; }
+.sw.shade { background: var(--muted); opacity: 0.2; }
+.tile h3 { display: flex; align-items: center; gap: 6px; margin: 0 0 4px; font-size: 0.9rem; }
 .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; margin: 8px 0 12px; }
 .tile { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
 .tile.mine { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
