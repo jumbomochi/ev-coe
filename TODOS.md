@@ -22,4 +22,4 @@
 - **Pros:** a more accurate radar and a smaller published hindcast error.
 - **Cons:** depends on DataMall publishing deregistration statistics, which hasn't been confirmed.
 - **Context:** design doc line 91 (stated exclusion); eng review D23.
-- **Depends on / blocked by:** the Assignment's DataMall check (whether deregistrations are published, and at what granularity).
+- **Depends on / blocked by:** unblocked (T1, 2026-10-31): DataMall publishes monthly deregistrations and 5-/10-year COE revalidations by category, both already in `data/`.

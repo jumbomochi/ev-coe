@@ -1,0 +1,73 @@
+{
+  "source": "LTA, Cost for New Cars Registered in Sep 2026 (selling prices quoted by authorised distributors): https://onemotoring.lta.gov.sg/content/dam/onemotoring/Buying/Car_Cost_Update/M032-Car_Cost_Update.pdf",
+  "edition": "2026-09",
+  "note": "Hand-entered from one edition (TODOS.md tracks automating this). Prices exclude COE; the app adds the latest premium for the category.",
+  "presets": [
+    {
+      "id": "honda-hrv-15-dx-sin",
+      "label": "Honda HR-V 1.5 DX",
+      "powertrain": "petrol",
+      "category": "A",
+      "band": "C1",
+      "electric": false,
+      "omv": 16722,
+      "priceWithoutCoe": 73899,
+      "priceWithCoeSep2026": 199899
+    },
+    {
+      "id": "toyota-corolla-altis-16-standard",
+      "label": "Toyota Corolla Altis 1.6",
+      "powertrain": "petrol",
+      "category": "A",
+      "band": "C1",
+      "electric": false,
+      "omv": 19185,
+      "priceWithoutCoe": 72998,
+      "priceWithCoeSep2026": 204888
+    },
+    {
+      "id": "honda-jazz-15-crosstar-ehev",
+      "label": "Honda Jazz Crosstar e:HEV",
+      "powertrain": "hybrid",
+      "category": "A",
+      "band": "B",
+      "electric": false,
+      "omv": 17796,
+      "priceWithoutCoe": 67899,
+      "priceWithCoeSep2026": 193899
+    },
+    {
+      "id": "kia-niro-hybrid-air",
+      "label": "Kia Niro Hybrid",
+      "powertrain": "hybrid",
+      "category": "A",
+      "band": "B",
+      "electric": false,
+      "omv": 21167,
+      "priceWithoutCoe": 75999,
+      "priceWithCoeSep2026": 205999
+    },
+    {
+      "id": "honda-super-one-ev",
+      "label": "Honda Super-One EV",
+      "powertrain": "electric",
+      "category": "A",
+      "band": "A",
+      "electric": true,
+      "omv": 24033,
+      "priceWithoutCoe": 70899,
+      "priceWithCoeSep2026": 196899
+    },
+    {
+      "id": "kia-ev5-earth-long-range",
+      "label": "Kia EV5 Earth Long Range",
+      "powertrain": "electric",
+      "category": "A",
+      "band": "A",
+      "electric": true,
+      "omv": 33028,
+      "priceWithoutCoe": 97999,
+      "priceWithCoeSep2026": 227999
+    }
+  ]
+}

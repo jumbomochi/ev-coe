@@ -1,0 +1,49 @@
+{
+  "note": "Dated markers on the supply chart. Policy markers are LTA/MOT decisions; tech markers are company targets, not Singapore launch dates (design premise 6).",
+  "policy": [
+    {
+      "date": "2026-12-31",
+      "label": "EEAI ends",
+      "detail": "EV Early Adoption Incentive (up to $7,500 off ARF) ends for EVs registered after 31 Dec 2026.",
+      "source": "https://www.lta.gov.sg/content/ltagov/en/newsroom/2025/9/news-releases/extension_of_ves_and_eeai_to_support_vehicle_electrification.html"
+    },
+    {
+      "date": "2027-06-30",
+      "label": "Cat A/B review due",
+      "detail": "LTA recommendations on merging COE Cat A and B are due in the first half of 2027; any effective date is unknown.",
+      "source": "https://www.lta.gov.sg/content/ltagov/en/newsroom/2026/10/news-releases/launch-of-public-consultation-on-coe-categorisation-for-cars.html"
+    },
+    {
+      "date": "2027-12-31",
+      "label": "VES ends",
+      "detail": "The Vehicular Emissions Scheme runs to 31 Dec 2027; nothing has been announced after.",
+      "source": "https://onemotoring.lta.gov.sg/content/onemotoring/home/buying/upfront-vehicle-costs/tax-structure.html"
+    },
+    {
+      "date": "2028-01-31",
+      "label": "0% car growth ends",
+      "detail": "The 0% growth rate for Cat A and B COEs applies until 31 Jan 2028.",
+      "source": "https://www.lta.gov.sg/content/dam/ltagov/news/press/2026/261026_COEQuota_Nov26-Jan27_AnnexA.pdf.pdf"
+    }
+  ],
+  "tech": [
+    {
+      "date": "2027-12-31",
+      "label": "BYD: first solid-state EV (small batch)",
+      "detail": "BYD targets limited all-solid-state production in 2027, mass production by 2030. Company target, not a Singapore launch date.",
+      "source": "https://electrek.co/2026/09/14/byd-leading-solid-state-battery-race-first-ev-2027"
+    },
+    {
+      "date": "2028-06-30",
+      "label": "Toyota: solid-state EVs (2027-28)",
+      "detail": "Toyota aims to launch all-solid-state EVs in 2027 or 2028, in limited batches. Company target.",
+      "source": "https://electrek.co/2026/01/30/toyota-partner-breaks-ground-on-all-solid-state-ev-battery-plant/"
+    },
+    {
+      "date": "2029-03-31",
+      "label": "Nissan: first solid-state EV (FY2028)",
+      "detail": "Nissan says its first solid-state EV is on track for fiscal 2028. Company target.",
+      "source": "https://electrek.co/2026/04/20/nissans-first-ev-solid-state-batteries-on-track-2028/"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "checked": "2026-10-31",
+  "note": "Flat rates for new cars as published on each bank's own page; EIRs as each bank discloses them (nominal annual, monthly rest). Banks call these indicative; dealer-channel rates may differ.",
+  "rates": [
+    { "lender": "DBS (apply online)", "flatRate": 0.0268, "for": "any", "publishedEir": { "rate": 0.0501, "tenureMonths": 84 }, "source": "https://www.dbs.com.sg/personal/promotion/carloan-online" },
+    { "lender": "DBS Green Car Loan", "flatRate": 0.0248, "for": "electric", "publishedEir": { "rate": 0.0465, "tenureMonths": 84 }, "source": "https://www.dbs.com.sg/personal/promotion/greencar-carloan" },
+    { "lender": "OCBC (petrol/hybrid)", "flatRate": 0.0278, "for": "non-electric", "publishedEir": { "rate": 0.0519, "tenureMonths": 84 }, "source": "https://www.ocbc.com/personal-banking/loans/car-loans" },
+    { "lender": "OCBC (EV)", "flatRate": 0.0248, "for": "electric", "publishedEir": { "rate": 0.0465, "tenureMonths": 84 }, "source": "https://www.ocbc.com/personal-banking/loans/car-loans" },
+    { "lender": "UOB", "flatRate": 0.0278, "for": "any", "publishedEir": { "rate": 0.0524, "tenureMonths": 60 }, "source": "https://www.uob.com.sg/personal/borrow/car-loan.page" }
+  ]
+}

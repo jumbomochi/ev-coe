@@ -4,6 +4,7 @@ import { unusedCoeMonths } from "./coeRebate";
 import { grossArf } from "./arf";
 import type { EmissionBand } from "./types";
 import lta from "./fixtures/lta-car-cost-2026-09.json";
+import bankRates from "../ui/config/bank-rates.json";
 
 const rules = rulesAt("2026-10-31");
 
@@ -173,6 +174,11 @@ describe("MAS car loans", () => {
     expect(loan.monthlyInstalmentCents).toBe(187500);
     expect(loan.effectiveRate).toBeGreaterThan(0.045);
     expect(loan.effectiveRate).toBeLessThan(0.05);
+  });
+
+  it.each(bankRates.rates.map((r) => [r.lender, r]))("matches %s's published EIR", (_lender, r) => {
+    const loan = rules.flatRateLoan(100000, r.flatRate, r.publishedEir.tenureMonths);
+    expect(Math.round(loan.effectiveRate * 10000) / 10000).toBe(r.publishedEir.rate);
   });
 
   it("rejects tenures beyond 7 years", () => {

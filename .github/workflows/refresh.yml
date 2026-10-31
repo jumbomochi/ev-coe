@@ -1,0 +1,93 @@
+# Daily data refresh and deploy (eng review D10, D11, D12, OV12).
+# One workflow: fetch + validate DataMall files → commit if changed → test → build → deploy to Pages.
+# A push made with GITHUB_TOKEN does not start other workflows or Pages builds, so this
+# workflow deploys itself. Missed or failed runs alert through a healthchecks.io "Cron" check
+# (set its URL as the HEALTHCHECK_URL repository secret).
+name: refresh
+
+on:
+  schedule:
+    - cron: "17 2 * * *" # 10:17 SGT daily, off the busy :00 minute
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: refresh
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      - name: Fetch and validate LTA DataMall files
+        run: npm run fetch-data
+
+      - name: Commit new data
+        run: |
+          if git diff --quiet -- data; then
+            echo "No new data."
+          else
+            git config user.name "ev-coe data bot"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add data
+            git commit -m "Update COE data ($(node -p "require('./data/coe-results.json').latestMonth"))"
+            git push
+          fi
+
+      - run: npm run typecheck
+      - run: npm test
+
+      - name: End-to-end test (synthetic car, frozen clock and data)
+        run: |
+          npx playwright install --with-deps chromium
+          npm run e2e
+
+      - run: npm run build
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+
+      - name: Report failure to healthchecks.io
+        if: failure()
+        env:
+          HEALTHCHECK_URL: ${{ secrets.HEALTHCHECK_URL }}
+        run: '[ -z "$HEALTHCHECK_URL" ] || curl -fsS -m 10 --retry 5 "$HEALTHCHECK_URL/fail"'
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Report success to healthchecks.io
+        env:
+          HEALTHCHECK_URL: ${{ secrets.HEALTHCHECK_URL }}
+        run: '[ -z "$HEALTHCHECK_URL" ] || curl -fsS -m 10 --retry 5 "$HEALTHCHECK_URL"'
+
+      - name: Report failure to healthchecks.io
+        if: failure()
+        env:
+          HEALTHCHECK_URL: ${{ secrets.HEALTHCHECK_URL }}
+        run: '[ -z "$HEALTHCHECK_URL" ] || curl -fsS -m 10 --retry 5 "$HEALTHCHECK_URL/fail"'
