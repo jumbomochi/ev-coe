@@ -2,6 +2,8 @@ import { describe, expect, it } from "vitest";
 import { exerciseForDate, rulesAt, type CurrentCar } from "./index";
 import { unusedCoeMonths } from "./coeRebate";
 import { grossArf } from "./arf";
+import type { EmissionBand } from "./types";
+import lta from "./fixtures/lta-car-cost-2026-09.json";
 
 const rules = rulesAt("2026-10-31");
 
@@ -116,6 +118,28 @@ describe("ARF", () => {
     const car = { omv: 30000, band: "B" as const, electric: false, registrationDate: "2026-11-15" };
     const arf = rules.newCarArf(car).netArf; // 34,000
     expect(rules.newCarParf(car, arf, "2036-11-15")).toBe(1700); // 10 years → 5%
+  });
+});
+
+describe("ARF, VES and EEAI against LTA's Sep 2026 car-cost table (every model)", () => {
+  const sep = rulesAt("2026-09-15");
+  // LTA splits this car's $23,048 of rebates as VES $22,497 + EEAI $551 (we get $22,500 + $548).
+  // Net ARF, which PARF uses, is $0 either way; only the split differs.
+  const SPLIT_DIFFERS = new Set(["GAC AION UT PREMIUM"]);
+
+  it.each(lta.rows.map((r) => [r.model, r]))("%s", (model, row) => {
+    const out = sep.newCarArf({
+      omv: row.omv,
+      band: row.band as EmissionBand,
+      electric: row.fuel === "E",
+      registrationDate: "2026-09-15",
+      coeExercise: { month: "2026-09", bidding: 1 },
+    });
+    const ltaNet = row.arf + Math.min(row.ves, 0) - Math.abs(row.eeai);
+    expect({ arf: out.grossArf, net: out.netArf, surcharge: out.vesSurcharge }).toEqual({ arf: row.arf, net: ltaNet, surcharge: Math.max(row.ves, 0) });
+    if (!SPLIT_DIFFERS.has(model)) {
+      expect({ vesRebate: out.vesRebate, eeai: out.eeai }).toEqual({ vesRebate: Math.max(-row.ves, 0), eeai: Math.abs(row.eeai) });
+    }
   });
 });
 

@@ -3,7 +3,10 @@ import emissionsConfig from "./config/emissions.json";
 import { compareDates, exerciseInRange } from "./dates";
 import type { Dollars, EmissionBand, Exercise, IsoDate } from "./types";
 
-/** Gross ARF on an OMV, using the tiers for the exercise the COE comes from. Rounded down to the dollar. */
+/**
+ * Gross ARF on an OMV, using the tiers for the exercise the COE comes from. Rounded up to the dollar,
+ * as LTA's car-cost tables show (OMV $25,626 → 27,876.4 → $27,877).
+ */
 export function grossArf(omv: Dollars, coeExercise: Exercise): Dollars {
   const schedule = arfConfig.schedules.find((s) =>
     exerciseInRange(coeExercise, s.fromExercise as Exercise | null, s.toExercise as Exercise | null),
@@ -16,7 +19,7 @@ export function grossArf(omv: Dollars, coeExercise: Exercise): Dollars {
     if (omv > lower) arf += (Math.min(omv, upper) - lower) * bracket.rate;
     lower = upper;
   }
-  return Math.floor(arf + 1e-9);
+  return Math.ceil(arf - 1e-9);
 }
 
 export type EmissionsPeriod = (typeof emissionsConfig.periods)[number];
@@ -41,7 +44,11 @@ export interface NetArf {
   assumed: boolean;
 }
 
-/** ARF for a new car registered on `registrationDate`, after EEAI/VES rebates and the minimum ARF. */
+/**
+ * ARF for a new car registered on `registrationDate`, after rebates and the minimum ARF.
+ * As LTA's car-cost tables apply them: the VES rebate first, then EEAI, each limited to the ARF
+ * still above the minimum (BYD Atto 1: ARF $14,388 → VES rebate $14,388, EEAI $0).
+ */
 export function netArf(args: {
   omv: Dollars;
   coeExercise: Exercise;
@@ -52,10 +59,11 @@ export function netArf(args: {
   const gross = grossArf(args.omv, args.coeExercise);
   const period = emissionsPeriod(args.registrationDate);
   const ves = period.ves[args.band];
-  const vesRebate = ves < 0 ? -ves : 0;
   const vesSurcharge = ves > 0 ? ves : 0;
-  const eeai = args.electric && period.eeai ? Math.min(Math.floor(gross * period.eeai.rate), period.eeai.capDollars) : 0;
   const floor = Math.min(gross, args.electric ? period.minimumArf.electric : period.minimumArf.other);
-  const net = Math.max(gross - eeai - vesRebate, floor);
+  const vesRebate = Math.min(ves < 0 ? -ves : 0, gross - floor);
+  const eeaiEntitlement = args.electric && period.eeai ? Math.min(Math.floor(gross * period.eeai.rate), period.eeai.capDollars) : 0;
+  const eeai = Math.min(eeaiEntitlement, gross - floor - vesRebate);
+  const net = gross - vesRebate - eeai;
   return { grossArf: gross, eeai, vesRebate, vesSurcharge, netArf: net, assumed: "assumed" in period && period.assumed === true };
 }

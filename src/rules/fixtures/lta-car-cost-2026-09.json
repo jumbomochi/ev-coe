@@ -1,0 +1,2139 @@
+{
+ "source": "LTA Cost for New Cars Registered, Sep 2026 edition: https://onemotoring.lta.gov.sg/content/dam/onemotoring/Buying/Car_Cost_Update/M032-Car_Cost_Update.pdf",
+ "note": "Columns 5-13 as published: OMV, tiered ARF payable, VES rebate(-)/surcharge(+) granted, EEAI granted (-). Registered Sep 2026.",
+ "rows": [
+  {
+   "model": "AUDI A3 SEDAN S LINE 1.5 TFSI (85 KW)",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 25626,
+   "arf": 27877,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "AUDI A3 SPORTBACK S LINE 1.5 TFSI (85 KW)",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 27079,
+   "arf": 29911,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "AUDI A5 SEDAN TFSI 150 KW",
+   "fuel": "P",
+   "band": "C1",
+   "omv": 38780,
+   "arf": 46292,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "AUDI A6 SEDAN TFSI 150 KW (MATRIX)",
+   "fuel": "P",
+   "band": "C2",
+   "omv": 40467,
+   "arf": 48888,
+   "ves": 22500,
+   "eeai": 0
+  },
+  {
+   "model": "AUDI Q3 SPORTBACK TFSI",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 30778,
+   "arf": 35090,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "AUDI Q3 SUV TFSI",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 30699,
+   "arf": 34979,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "AUDI Q4 45 E-TRON MY26",
+   "fuel": "E",
+   "band": "A",
+   "omv": 49437,
+   "arf": 65931,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "AUDI Q4 SPORTBACK 45 E-TRON",
+   "fuel": "E",
+   "band": "A",
+   "omv": 49573,
+   "arf": 66189,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "AUDI Q5 S LINE TFSI 150 KW (MATRIX)",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 41084,
+   "arf": 50060,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "AUDI Q5 SPORTBACK S LINE TFSI QUATTRO 150 KW",
+   "fuel": "H",
+   "band": "C2",
+   "omv": 43876,
+   "arf": 55365,
+   "ves": 22500,
+   "eeai": 0
+  },
+  {
+   "model": "AUDI Q6 E-TRON (MATRIX, R/S/ABAG)",
+   "fuel": "E",
+   "band": "A",
+   "omv": 54811,
+   "arf": 76141,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "AUDI RS 5 AVANT (MATRIX,OLED REAR,R/S/ABAG)",
+   "fuel": "R",
+   "band": "C2",
+   "omv": 108175,
+   "arf": 226160,
+   "ves": 22500,
+   "eeai": 0
+  },
+  {
+   "model": "AVATR 07 MAX RWD",
+   "fuel": "E",
+   "band": "A",
+   "omv": 43955,
+   "arf": 55515,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "AVATR 11 RWD (LONG RANGE)",
+   "fuel": "E",
+   "band": "A",
+   "omv": 63824,
+   "arf": 95560,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "AVATR 11 ULTRA RWD",
+   "fuel": "E",
+   "band": "A",
+   "omv": 62538,
+   "arf": 92345,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "B.M.W. 116 MSPT ALED",
+   "fuel": "P",
+   "band": "C1",
+   "omv": 30719,
+   "arf": 35007,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "B.M.W. 216 GC MSPT ALED",
+   "fuel": "P",
+   "band": "C1",
+   "omv": 34054,
+   "arf": 39676,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "B.M.W. 216 GC MSPT I.GLOW ALED",
+   "fuel": "P",
+   "band": "C1",
+   "omv": 34015,
+   "arf": 39621,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "B.M.W. 216I ACTIVE TOURER INSPIRING",
+   "fuel": "P",
+   "band": "C1",
+   "omv": 31815,
+   "arf": 36541,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "B.M.W. 318I ISP LED HL ITP",
+   "fuel": "P",
+   "band": "C1",
+   "omv": 42417,
+   "arf": 52593,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "B.M.W. 420I CONVERTIBLE MSPT ALED",
+   "fuel": "P",
+   "band": "C1",
+   "omv": 57002,
+   "arf": 80304,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "B.M.W. 520I ALED",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 57597,
+   "arf": 81435,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "B.M.W. 520I MSPT ALED",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 58127,
+   "arf": 82442,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "B.M.W. 530I MSPT ALED",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 61842,
+   "arf": 90605,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "B.M.W. 735I PINNACLE PGR ALED ITP",
+   "fuel": "H",
+   "band": "C2",
+   "omv": 102542,
+   "arf": 208135,
+   "ves": 22500,
+   "eeai": 0
+  },
+  {
+   "model": "B.M.W. I4 EDRIVE35 MSPT ALED",
+   "fuel": "E",
+   "band": "A",
+   "omv": 59759,
+   "arf": 85543,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "B.M.W. I7 50 XDRIVE MSPT I.GLOW",
+   "fuel": "E",
+   "band": "A",
+   "omv": 113036,
+   "arf": 241716,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "B.M.W. IX1 EDRIVE20 MSPT ALED",
+   "fuel": "E",
+   "band": "A",
+   "omv": 49298,
+   "arf": 65667,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "B.M.W. IX1 EDRIVE20 XLINE",
+   "fuel": "E",
+   "band": "A",
+   "omv": 46710,
+   "arf": 60749,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "B.M.W. IX2 EDRIVE20 MSPT ALED",
+   "fuel": "E",
+   "band": "A",
+   "omv": 50350,
+   "arf": 67665,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "B.M.W. IX3 50 XDRIVE PGR I.GLOW MSPT ALED",
+   "fuel": "E",
+   "band": "A",
+   "omv": 64484,
+   "arf": 97210,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "B.M.W. IX3 50 XDRIVE PGR I.GLOW MSPTPRO ALED",
+   "fuel": "E",
+   "band": "A",
+   "omv": 68636,
+   "arf": 107590,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "B.M.W. X1 M35I",
+   "fuel": "P",
+   "band": "C3",
+   "omv": 51680,
+   "arf": 70192,
+   "ves": 35000,
+   "eeai": 0
+  },
+  {
+   "model": "B.M.W. X1 SDRIVE16 ALED",
+   "fuel": "P",
+   "band": "C1",
+   "omv": 36772,
+   "arf": 43481,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "B.M.W. X1 SDRIVE16 MSPT ALED",
+   "fuel": "P",
+   "band": "C1",
+   "omv": 38359,
+   "arf": 45703,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "B.M.W. X2 SDRIVE16 MSPT ALED",
+   "fuel": "P",
+   "band": "C1",
+   "omv": 39582,
+   "arf": 47415,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "B.M.W. X3 20 XDRIVE MSPT ALED",
+   "fuel": "H",
+   "band": "C2",
+   "omv": 54716,
+   "arf": 75961,
+   "ves": 22500,
+   "eeai": 0
+  },
+  {
+   "model": "B.M.W. X3 M50 XDRIVE ALED",
+   "fuel": "H",
+   "band": "C3",
+   "omv": 79285,
+   "arf": 134213,
+   "ves": 35000,
+   "eeai": 0
+  },
+  {
+   "model": "BYD ATTO 1",
+   "fuel": "E",
+   "band": "A",
+   "omv": 14388,
+   "arf": 14388,
+   "ves": -14388,
+   "eeai": 0
+  },
+  {
+   "model": "BYD ATTO 2 PREMIUM",
+   "fuel": "E",
+   "band": "A",
+   "omv": 22036,
+   "arf": 22851,
+   "ves": -22500,
+   "eeai": -351
+  },
+  {
+   "model": "BYD ATTO 3 EVO DYNAMIC",
+   "fuel": "E",
+   "band": "A",
+   "omv": 26206,
+   "arf": 28689,
+   "ves": -22500,
+   "eeai": -6189
+  },
+  {
+   "model": "BYD ATTO 3 EXTENDED RANGE",
+   "fuel": "E",
+   "band": "A",
+   "omv": 27889,
+   "arf": 31045,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "BYD DENZA B5 ORION",
+   "fuel": "R",
+   "band": "C2",
+   "omv": 50036,
+   "arf": 67069,
+   "ves": 22500,
+   "eeai": 0
+  },
+  {
+   "model": "BYD DENZA D9 ELITE",
+   "fuel": "E",
+   "band": "A",
+   "omv": 58000,
+   "arf": 82200,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "BYD M6 7-SEATER(ER)",
+   "fuel": "E",
+   "band": "A",
+   "omv": 28661,
+   "arf": 32126,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "BYD SEAL 6 DYNAMIC DM-I",
+   "fuel": "R",
+   "band": "B",
+   "omv": 18900,
+   "arf": 18900,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "BYD SEAL 6 DYNAMIC",
+   "fuel": "E",
+   "band": "A",
+   "omv": 23339,
+   "arf": 24675,
+   "ves": -22500,
+   "eeai": -2175
+  },
+  {
+   "model": "BYD SEAL 6 PREMIUM DMI",
+   "fuel": "R",
+   "band": "B",
+   "omv": 21780,
+   "arf": 22492,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "BYD SEAL 6 PREMIUM",
+   "fuel": "E",
+   "band": "A",
+   "omv": 24587,
+   "arf": 26422,
+   "ves": -22500,
+   "eeai": -3922
+  },
+  {
+   "model": "BYD SEAL 6 WAGON DMI",
+   "fuel": "R",
+   "band": "B",
+   "omv": 20880,
+   "arf": 21232,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "BYD SEAL DYNAMIC 100KW",
+   "fuel": "E",
+   "band": "A",
+   "omv": 34508,
+   "arf": 40312,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "BYD SEAL PREMIUM",
+   "fuel": "E",
+   "band": "A",
+   "omv": 36265,
+   "arf": 42771,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "BYD SEALION 6 DMI",
+   "fuel": "R",
+   "band": "B",
+   "omv": 24850,
+   "arf": 26790,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "BYD SEALION 7 DYNAMIC",
+   "fuel": "E",
+   "band": "A",
+   "omv": 35618,
+   "arf": 41866,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "BYD SEALION 7 PERFORMANCE ER",
+   "fuel": "E",
+   "band": "A",
+   "omv": 45188,
+   "arf": 57858,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "BYD SEALION 7 PREMIUM",
+   "fuel": "E",
+   "band": "A",
+   "omv": 36397,
+   "arf": 42956,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "BYD SEALION 7 PREMIUM ER",
+   "fuel": "E",
+   "band": "A",
+   "omv": 36283,
+   "arf": 42797,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "BYD SEALION 8 DYNAMIC DM-I",
+   "fuel": "R",
+   "band": "B",
+   "omv": 29832,
+   "arf": 33765,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "CHERY ICAUR V23 BEV 2WD",
+   "fuel": "E",
+   "band": "A",
+   "omv": 23915,
+   "arf": 25481,
+   "ves": -22500,
+   "eeai": -2981
+  },
+  {
+   "model": "CHERY JAECOO 5 BEV 2WD 155KW",
+   "fuel": "E",
+   "band": "A",
+   "omv": 24339,
+   "arf": 26075,
+   "ves": -22500,
+   "eeai": -3575
+  },
+  {
+   "model": "CHERY JAECOO6 EV 2WD 99KW",
+   "fuel": "E",
+   "band": "A",
+   "omv": 27271,
+   "arf": 30180,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "CHERY JAECOO7 PHEV",
+   "fuel": "R",
+   "band": "B",
+   "omv": 27720,
+   "arf": 30808,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "CHERY JAECOO8 PHEV",
+   "fuel": "R",
+   "band": "C1",
+   "omv": 36273,
+   "arf": 42783,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "CHERY OMODA E5 99KW 2WD",
+   "fuel": "E",
+   "band": "A",
+   "omv": 24182,
+   "arf": 25855,
+   "ves": -22500,
+   "eeai": -3355
+  },
+  {
+   "model": "CUPRA TAVASCAN ENDURANCE",
+   "fuel": "E",
+   "band": "A",
+   "omv": 44042,
+   "arf": 55680,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "DEEPAL S05 MAX RWD (LR)",
+   "fuel": "E",
+   "band": "A",
+   "omv": 28522,
+   "arf": 31931,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "DEEPAL S07 RWD",
+   "fuel": "E",
+   "band": "A",
+   "omv": 37450,
+   "arf": 44430,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "DONGFENG 007 STANDARD RANGE SINGLE MOTOR",
+   "fuel": "E",
+   "band": "A",
+   "omv": 26037,
+   "arf": 28452,
+   "ves": -22500,
+   "eeai": -5952
+  },
+  {
+   "model": "DONGFENG BOX",
+   "fuel": "E",
+   "band": "A",
+   "omv": 18278,
+   "arf": 18278,
+   "ves": -18278,
+   "eeai": 0
+  },
+  {
+   "model": "DONGFENG VIGO",
+   "fuel": "E",
+   "band": "A",
+   "omv": 18927,
+   "arf": 18927,
+   "ves": -18927,
+   "eeai": 0
+  },
+  {
+   "model": "GAC AION HYPTEC HT LUXURY",
+   "fuel": "E",
+   "band": "A",
+   "omv": 47644,
+   "arf": 62524,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "GAC AION HYPTEC HT PREMIUM",
+   "fuel": "E",
+   "band": "A",
+   "omv": 35015,
+   "arf": 41021,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "GAC AION UT PREMIUM",
+   "fuel": "E",
+   "band": "A",
+   "omv": 22177,
+   "arf": 23048,
+   "ves": -22497,
+   "eeai": -551
+  },
+  {
+   "model": "GAC AION V LUXURY",
+   "fuel": "E",
+   "band": "A",
+   "omv": 27377,
+   "arf": 30328,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "GAC AION V PREMIUM",
+   "fuel": "E",
+   "band": "A",
+   "omv": 24999,
+   "arf": 26999,
+   "ves": -22500,
+   "eeai": -4499
+  },
+  {
+   "model": "GAC E9 2.0 AUTO GX PHEV",
+   "fuel": "R",
+   "band": "C1",
+   "omv": 53982,
+   "arf": 74566,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "GREAT WALL ORA 5",
+   "fuel": "E",
+   "band": "A",
+   "omv": 22820,
+   "arf": 23948,
+   "ves": -22500,
+   "eeai": -1448
+  },
+  {
+   "model": "GREAT WALL ORA GOOD CAT SUNROOF",
+   "fuel": "E",
+   "band": "A",
+   "omv": 26551,
+   "arf": 29172,
+   "ves": -22500,
+   "eeai": -6672
+  },
+  {
+   "model": "HONDA CIVIC 2.0L DOHC I-VTEC E:HEV",
+   "fuel": "H",
+   "band": "B",
+   "omv": 34112,
+   "arf": 39757,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "HONDA FREED 1.5 HE7-S E:HEV",
+   "fuel": "H",
+   "band": "B",
+   "omv": 20230,
+   "arf": 20322,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "HONDA HRV 1.5 DX-SIN",
+   "fuel": "P",
+   "band": "C1",
+   "omv": 16722,
+   "arf": 16722,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "HONDA HRV 1.5 HX-SIN",
+   "fuel": "H",
+   "band": "B",
+   "omv": 19901,
+   "arf": 19901,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "HONDA JAZZ 1.5 CROSSTAR E:HEV",
+   "fuel": "H",
+   "band": "B",
+   "omv": 17796,
+   "arf": 17796,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "HONDA JAZZ 1.5 LUXE E:HEV",
+   "fuel": "H",
+   "band": "B",
+   "omv": 17387,
+   "arf": 17387,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "HONDA STEP WGN 2.0 E:HEV SPADA",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 28666,
+   "arf": 32133,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "HONDA SUPER-ONE EV",
+   "fuel": "E",
+   "band": "A",
+   "omv": 24033,
+   "arf": 25647,
+   "ves": -22500,
+   "eeai": -3147
+  },
+  {
+   "model": "HONDA ZR-V 2.0 E:HEV",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 26441,
+   "arf": 29018,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "HONGQI E-HS9",
+   "fuel": "E",
+   "band": "A",
+   "omv": 70918,
+   "arf": 113295,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "HYUNDAI CN7 AVANTE 1.6 GDI HEV SR",
+   "fuel": "H",
+   "band": "B",
+   "omv": 24870,
+   "arf": 26818,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "HYUNDAI IONIQ 5 2WD SR PRESTIGE",
+   "fuel": "E",
+   "band": "A",
+   "omv": 36131,
+   "arf": 42584,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "HYUNDAI IONIQ 6 2WD SR PRESTIGE",
+   "fuel": "E",
+   "band": "A",
+   "omv": 36607,
+   "arf": 43250,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "HYUNDAI MX5 SANTA FE 1.6 HEV T-GDI 2WD",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 30895,
+   "arf": 35253,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "HYUNDAI OE ELEXIO EV 2WD",
+   "fuel": "E",
+   "band": "A",
+   "omv": 26539,
+   "arf": 29155,
+   "ves": -22500,
+   "eeai": -6655
+  },
+  {
+   "model": "HYUNDAI SX2 KONA 1.6 GDI HEV",
+   "fuel": "H",
+   "band": "B",
+   "omv": 19183,
+   "arf": 19183,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "HYUNDAI SX2 KONA 1.6 GDI HEV SR",
+   "fuel": "H",
+   "band": "B",
+   "omv": 22982,
+   "arf": 24175,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "JAGUAR F-PACE 2.0P PHEV R-DYN S 404PS",
+   "fuel": "R",
+   "band": "C1",
+   "omv": 50795,
+   "arf": 68511,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "KIA CARNIVAL 1.6 HEV SUNROOF",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 41635,
+   "arf": 51107,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "KIA CARNIVAL 1.6 HEV SUNROOF",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 40721,
+   "arf": 49370,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "KIA EV5 EARTH LONG RANGE",
+   "fuel": "E",
+   "band": "A",
+   "omv": 33028,
+   "arf": 38240,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "KIA NIRO HYBRID AIR",
+   "fuel": "H",
+   "band": "B",
+   "omv": 21167,
+   "arf": 21634,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "KIA NIRO HYBRID EARTH",
+   "fuel": "H",
+   "band": "B",
+   "omv": 27869,
+   "arf": 31017,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "KIA NIRO PLUS HYBRID",
+   "fuel": "H",
+   "band": "B",
+   "omv": 24366,
+   "arf": 26113,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "KIA SORENTO 1.6 HYBRID EARTH SUNROOF",
+   "fuel": "H",
+   "band": "B",
+   "omv": 34731,
+   "arf": 40624,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "KIA SORENTO 1.6 HYBRID AIR",
+   "fuel": "H",
+   "band": "B",
+   "omv": 31752,
+   "arf": 36453,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "KIA SORENTO1.6 A HEV SX TECH PACK SUNROOF",
+   "fuel": "H",
+   "band": "B",
+   "omv": 38046,
+   "arf": 45265,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "LAND ROVER DEFENDER 110 2.0 PHEV X-DYN HSE 300PS 5S",
+   "fuel": "R",
+   "band": "C3",
+   "omv": 66082,
+   "arf": 101205,
+   "ves": 35000,
+   "eeai": 0
+  },
+  {
+   "model": "LEAPMOTOR B10 SUNROOF (HIGH VERSION)",
+   "fuel": "E",
+   "band": "A",
+   "omv": 23098,
+   "arf": 24338,
+   "ves": -22500,
+   "eeai": -1838
+  },
+  {
+   "model": "LEAPMOTOR C10",
+   "fuel": "E",
+   "band": "A",
+   "omv": 27900,
+   "arf": 31060,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "M.G. IM5 EV LUXURY",
+   "fuel": "E",
+   "band": "A",
+   "omv": 37953,
+   "arf": 45135,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "M.G. IM5 EV SPORT",
+   "fuel": "E",
+   "band": "A",
+   "omv": 47463,
+   "arf": 62180,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "M.G. IM6 EV LUXURY",
+   "fuel": "E",
+   "band": "A",
+   "omv": 38271,
+   "arf": 45580,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "M.G. IM6 EV SPORT",
+   "fuel": "E",
+   "band": "A",
+   "omv": 47125,
+   "arf": 61538,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "M.G. MG4 URBAN EV",
+   "fuel": "E",
+   "band": "A",
+   "omv": 19467,
+   "arf": 19467,
+   "ves": -19467,
+   "eeai": 0
+  },
+  {
+   "model": "M.G. MGS5 EV LUXURY",
+   "fuel": "E",
+   "band": "A",
+   "omv": 23568,
+   "arf": 24996,
+   "ves": -22500,
+   "eeai": -2496
+  },
+  {
+   "model": "M.G. MGS6 EV LUXURY",
+   "fuel": "E",
+   "band": "A",
+   "omv": 27516,
+   "arf": 30523,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "MASERATI GRECALE GT HYBRID",
+   "fuel": "H",
+   "band": "C3",
+   "omv": 59865,
+   "arf": 85744,
+   "ves": 35000,
+   "eeai": 0
+  },
+  {
+   "model": "MAXUS MIFA 7 ELITE",
+   "fuel": "E",
+   "band": "A",
+   "omv": 33023,
+   "arf": 38233,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "MAXUS MIFA 7 PREMIUM SUNROOF",
+   "fuel": "E",
+   "band": "A",
+   "omv": 39521,
+   "arf": 47330,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "MAXUS MIFA 9 LUXURY SUNROOF",
+   "fuel": "E",
+   "band": "A",
+   "omv": 46481,
+   "arf": 60314,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "MAZDA CX-5 2.0 AT M-HYBRID LUXURY I7",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 18411,
+   "arf": 18411,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "MAZDA CX-5 2.0 AT M-HYBRID LUXURY SPORTS I7",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 19752,
+   "arf": 19752,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "MAZDA MAZDA3 4DR 1.5 AT M-HEV CLASSIC PLUS I4R",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 16880,
+   "arf": 16880,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "MAZDA MAZDA3 4DR 1.5 AT M-HEV EXECUTIVE I4RC",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 16453,
+   "arf": 16453,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "MAZDA MAZDA3 4DR 1.5 AT M-HYBRID CLASSIC I4RC",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 15350,
+   "arf": 15350,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "MAZDA MAZDA3 4DR 1.5 AT M-HYBRID LUXURY I4RC",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 18174,
+   "arf": 18174,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "MAZDA MAZDA6E FASTBACK GT",
+   "fuel": "E",
+   "band": "A",
+   "omv": 30026,
+   "arf": 34037,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "MAZDA MAZDA6E FASTBACK SPORTS",
+   "fuel": "E",
+   "band": "A",
+   "omv": 29818,
+   "arf": 33746,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "MERCEDES BENZ AMG CLE 53 4MATIC+ COUPE PSR",
+   "fuel": "H",
+   "band": "C3",
+   "omv": 76748,
+   "arf": 127870,
+   "ves": 35000,
+   "eeai": 0
+  },
+  {
+   "model": "MERCEDES BENZ AMG GLB 35 4MATIC",
+   "fuel": "H",
+   "band": "C3",
+   "omv": 52449,
+   "arf": 71654,
+   "ves": 35000,
+   "eeai": 0
+  },
+  {
+   "model": "MERCEDES BENZ B180 PROGRESSIVE",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 34969,
+   "arf": 40957,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "MERCEDES BENZ C180 AMG LN",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 37470,
+   "arf": 44458,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "MERCEDES BENZ C180 AMG LN",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 43079,
+   "arf": 53851,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "MERCEDES BENZ C180 AVG LN EMH CAB",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 38705,
+   "arf": 46187,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "MERCEDES BENZ CLA 180 PROGRESSIVE LN",
+   "fuel": "H",
+   "band": "B",
+   "omv": 39790,
+   "arf": 47706,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "MERCEDES BENZ CLA 200 AMG LN",
+   "fuel": "E",
+   "band": "A",
+   "omv": 47957,
+   "arf": 63119,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "MERCEDES BENZ CLA 200 AMG LN SHOOTING BRAKE",
+   "fuel": "E",
+   "band": "A",
+   "omv": 49620,
+   "arf": 66278,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "MERCEDES BENZ CLA 200 AMG LN SPORT",
+   "fuel": "H",
+   "band": "B",
+   "omv": 44263,
+   "arf": 56100,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "MERCEDES BENZ CLA 200 PROGRESSIVE LN",
+   "fuel": "E",
+   "band": "A",
+   "omv": 45558,
+   "arf": 58561,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "MERCEDES BENZ CLA 250+ AMG LN SPORT, LHP AHA CSS",
+   "fuel": "E",
+   "band": "A",
+   "omv": 54743,
+   "arf": 76012,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "MERCEDES BENZ E200 AMG LN",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 70735,
+   "arf": 112838,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "MERCEDES BENZ E200 AVANTGARDE LN",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 61020,
+   "arf": 88550,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "MERCEDES BENZ E200 AVG LN CAB IRG",
+   "fuel": "H",
+   "band": "C2",
+   "omv": 62210,
+   "arf": 91525,
+   "ves": 22500,
+   "eeai": 0
+  },
+  {
+   "model": "MERCEDES BENZ E200 BUSINESS EDITION",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 49882,
+   "arf": 66776,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "MERCEDES BENZ E200 EXCLUSIVE LN",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 63940,
+   "arf": 95850,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "MERCEDES BENZ GLA 180 AMG LN",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 36172,
+   "arf": 42641,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "MERCEDES BENZ GLA 180 PROGRESSIVE LN, EMH",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 38091,
+   "arf": 45328,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "MERCEDES BENZ GLB 180 AMG LN",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 45640,
+   "arf": 58716,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "MERCEDES BENZ GLB 180 PROGRESSIVE LINE, EMH",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 38776,
+   "arf": 46287,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "MERCEDES BENZ GLB 180 PROGRESSIVE LN",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 42736,
+   "arf": 53199,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "MERCEDES BENZ GLB 200 AMG LN EV",
+   "fuel": "E",
+   "band": "A",
+   "omv": 50915,
+   "arf": 68739,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "MERCEDES BENZ GLB 200 PROGRESSIVE EV",
+   "fuel": "E",
+   "band": "A",
+   "omv": 47936,
+   "arf": 63079,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "MERCEDES BENZ GLC 400 AMG LN",
+   "fuel": "E",
+   "band": "A",
+   "omv": 67709,
+   "arf": 105273,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "MERCEDES BENZ GLC 400 AMG LN SPORT",
+   "fuel": "E",
+   "band": "A",
+   "omv": 78456,
+   "arf": 132140,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "MERCEDES BENZ GLC200 4MATIC AVG LN",
+   "fuel": "H",
+   "band": "C2",
+   "omv": 53941,
+   "arf": 74488,
+   "ves": 22500,
+   "eeai": 0
+  },
+  {
+   "model": "MERCEDES BENZ GLC200 4MATIC SUV AVG",
+   "fuel": "H",
+   "band": "C2",
+   "omv": 52769,
+   "arf": 72262,
+   "ves": 22500,
+   "eeai": 0
+  },
+  {
+   "model": "MERCEDES BENZ GLE 400 E 4M COUPE, WODAPP",
+   "fuel": "R",
+   "band": "C2",
+   "omv": 88964,
+   "arf": 164685,
+   "ves": 22500,
+   "eeai": 0
+  },
+  {
+   "model": "MERCEDES BENZ MERCEDES-BENZ GLB 250+ AMG LN WDE",
+   "fuel": "E",
+   "band": "A",
+   "omv": 56290,
+   "arf": 78951,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "MINI ACEMAN E",
+   "fuel": "E",
+   "band": "A",
+   "omv": 40437,
+   "arf": 48831,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "MINI ACEMAN SE",
+   "fuel": "E",
+   "band": "A",
+   "omv": 44392,
+   "arf": 56345,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "NIO FIREFLY",
+   "fuel": "E",
+   "band": "A",
+   "omv": 22883,
+   "arf": 24037,
+   "ves": -22500,
+   "eeai": -1537
+  },
+  {
+   "model": "NISSAN ARIYA B6 EV",
+   "fuel": "E",
+   "band": "A",
+   "omv": 50075,
+   "arf": 67143,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "NISSAN KICKS PREMIUM 1.2L E-POWER",
+   "fuel": "H",
+   "band": "B",
+   "omv": 23887,
+   "arf": 25442,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "NISSAN KICKS PREMIUM PLUS 1.2L E-POWER",
+   "fuel": "H",
+   "band": "B",
+   "omv": 25131,
+   "arf": 27184,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "NISSAN NOTE E-POWER 1.2L PREMIUM",
+   "fuel": "H",
+   "band": "B",
+   "omv": 17476,
+   "arf": 17476,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "NISSAN NOTE E-POWER 1.2L PREMIUM",
+   "fuel": "H",
+   "band": "B",
+   "omv": 17326,
+   "arf": 17326,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "NISSAN SERENA E-POWER 7S HIGHWAY STAR PRESTIGE",
+   "fuel": "H",
+   "band": "B",
+   "omv": 29484,
+   "arf": 33278,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "NISSAN SERENA E-POWER HIGHWAY STAR PRESTIGE 7",
+   "fuel": "H",
+   "band": "B",
+   "omv": 28794,
+   "arf": 32312,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "NISSAN SERENA E-POWER HIGHWAY STAR SMART 8S",
+   "fuel": "H",
+   "band": "B",
+   "omv": 29354,
+   "arf": 33096,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "NISSAN SERENA E-POWER HIGHWAY STAR SMART 8S",
+   "fuel": "H",
+   "band": "B",
+   "omv": 28774,
+   "arf": 32284,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "NISSAN X-TRAIL E-POWER E-4ORCE",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 36857,
+   "arf": 43600,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "OPEL CORSA-E",
+   "fuel": "E",
+   "band": "A",
+   "omv": 30732,
+   "arf": 35025,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "POLESTAR POLESTAR 4 LONG RANGE SINGLE MOTOR",
+   "fuel": "E",
+   "band": "A",
+   "omv": 58696,
+   "arf": 83523,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "PORSCHE 911 CARRERA II 2+2 SR SES (992)",
+   "fuel": "P",
+   "band": "C3",
+   "omv": 135243,
+   "arf": 312778,
+   "ves": 35000,
+   "eeai": 0
+  },
+  {
+   "model": "PORSCHE CAYENNE (X1)",
+   "fuel": "E",
+   "band": "A",
+   "omv": 99736,
+   "arf": 199156,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "PORSCHE CAYENNE COUPE (X1)",
+   "fuel": "E",
+   "band": "A",
+   "omv": 100935,
+   "arf": 202992,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "PORSCHE MACAN (95B)",
+   "fuel": "P",
+   "band": "C3",
+   "omv": 64836,
+   "arf": 98090,
+   "ves": 35000,
+   "eeai": 0
+  },
+  {
+   "model": "PORSCHE MACAN (XA)",
+   "fuel": "E",
+   "band": "A",
+   "omv": 70424,
+   "arf": 112060,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "PORSCHE MACAN S (95B)",
+   "fuel": "P",
+   "band": "C3",
+   "omv": 73862,
+   "arf": 120655,
+   "ves": 35000,
+   "eeai": 0
+  },
+  {
+   "model": "PORSCHE MACAN S SES (95B)",
+   "fuel": "P",
+   "band": "C3",
+   "omv": 77487,
+   "arf": 129718,
+   "ves": 35000,
+   "eeai": 0
+  },
+  {
+   "model": "PORSCHE PANAMERA 4+1 (YA)",
+   "fuel": "P",
+   "band": "C3",
+   "omv": 123088,
+   "arf": 273882,
+   "ves": 35000,
+   "eeai": 0
+  },
+  {
+   "model": "PORSCHE TAYCAN II 4+1 TL (Y1A)",
+   "fuel": "E",
+   "band": "A",
+   "omv": 100473,
+   "arf": 201514,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "PROTON EMAS 5 PREMIUM 85KW",
+   "fuel": "E",
+   "band": "A",
+   "omv": 15164,
+   "arf": 15164,
+   "ves": -15164,
+   "eeai": 0
+  },
+  {
+   "model": "SKODA KAMIQ SELECTION DC",
+   "fuel": "P",
+   "band": "C1",
+   "omv": 20910,
+   "arf": 21274,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "SKODA OCTAVIA COMBI RS",
+   "fuel": "P",
+   "band": "C2",
+   "omv": 31444,
+   "arf": 36022,
+   "ves": 22500,
+   "eeai": 0
+  },
+  {
+   "model": "SKODA OCTAVIA COMBI SELECTION 1.5 TSI",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 24686,
+   "arf": 26561,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "SKODA OCTAVIA SELECTION 1.5 TSI",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 22986,
+   "arf": 24181,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "SUBARU E-OUTBACK",
+   "fuel": "E",
+   "band": "A",
+   "omv": 42328,
+   "arf": 52424,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "SUBARU FORESTER 2.5I-S EYESIGHT HYBRID AWD CVT",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 21076,
+   "arf": 21507,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "SUBARU SOLTERRA XT",
+   "fuel": "E",
+   "band": "A",
+   "omv": 42119,
+   "arf": 52027,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "SUZUKI SWIFT 1.2 GLX CVT",
+   "fuel": "H",
+   "band": "B",
+   "omv": 12878,
+   "arf": 12878,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "TESLA MODEL 3 RWD 110",
+   "fuel": "E",
+   "band": "A",
+   "omv": 41049,
+   "arf": 49994,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "TESLA MODEL 3 RWD LONG RANGE",
+   "fuel": "E",
+   "band": "A",
+   "omv": 44425,
+   "arf": 56408,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "TESLA MODEL 3 STANDARD RWD 110",
+   "fuel": "E",
+   "band": "A",
+   "omv": 35670,
+   "arf": 41938,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "TESLA MODEL Y LR RWD",
+   "fuel": "E",
+   "band": "A",
+   "omv": 49144,
+   "arf": 65374,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "TESLA MODEL Y RWD 110",
+   "fuel": "E",
+   "band": "A",
+   "omv": 45134,
+   "arf": 57755,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "TESLA MODEL YL LR AWD",
+   "fuel": "E",
+   "band": "A",
+   "omv": 55323,
+   "arf": 77114,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "TOYOTA ALPHARD HYBRID STANDARD (AUTO)",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 71511,
+   "arf": 114778,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "TOYOTA BZ4X",
+   "fuel": "E",
+   "band": "A",
+   "omv": 40394,
+   "arf": 48749,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "TOYOTA CAMRY 2.5 HEV (AUTO) (2WD)",
+   "fuel": "H",
+   "band": "B",
+   "omv": 42044,
+   "arf": 51884,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "TOYOTA COROLLA ALTIS 1.6 STANDARD",
+   "fuel": "P",
+   "band": "C1",
+   "omv": 19185,
+   "arf": 19185,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "TOYOTA COROLLA ALTIS HYBRID",
+   "fuel": "H",
+   "band": "B",
+   "omv": 27277,
+   "arf": 30188,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "TOYOTA COROLLA CROSS HYBRID",
+   "fuel": "H",
+   "band": "B",
+   "omv": 29246,
+   "arf": 32945,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "TOYOTA HARRIER HYBRID PREMIUM",
+   "fuel": "H",
+   "band": "B",
+   "omv": 42108,
+   "arf": 52006,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "TOYOTA LEXUS ES350H HYBRID",
+   "fuel": "H",
+   "band": "B",
+   "omv": 59700,
+   "arf": 85430,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "TOYOTA LEXUS LBX ELEGANT",
+   "fuel": "H",
+   "band": "B",
+   "omv": 35003,
+   "arf": 41005,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "TOYOTA LEXUS NX350H 5DR SUV (AT)(4WD) EXECUTIVE",
+   "fuel": "H",
+   "band": "B",
+   "omv": 55105,
+   "arf": 76700,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "TOYOTA LEXUS RZ350E EXECUTIVE",
+   "fuel": "E",
+   "band": "A",
+   "omv": 63856,
+   "arf": 95640,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "TOYOTA NOAH HYBRID ELEGANCE",
+   "fuel": "H",
+   "band": "B",
+   "omv": 28983,
+   "arf": 32577,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "TOYOTA NOAH HYBRID STANDARD",
+   "fuel": "H",
+   "band": "B",
+   "omv": 28083,
+   "arf": 31317,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "TOYOTA PRIUS HYBRID (AUTO)",
+   "fuel": "H",
+   "band": "B",
+   "omv": 30355,
+   "arf": 34497,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "TOYOTA RAV4 HYBRID PREMIUM",
+   "fuel": "H",
+   "band": "B",
+   "omv": 37803,
+   "arf": 44925,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "TOYOTA SIENTA HYBRID",
+   "fuel": "H",
+   "band": "B",
+   "omv": 26813,
+   "arf": 29539,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "TOYOTA VELLFIRE HYBRID (AUTO)",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 75031,
+   "arf": 123578,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "TOYOTA VIOS HYBRID",
+   "fuel": "H",
+   "band": "B",
+   "omv": 21440,
+   "arf": 22016,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "VOLKSWAGEN GOLF LIFE PLUS 1.5 ETSI EU6EB",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 20217,
+   "arf": 20304,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "VOLKSWAGEN GOLF R-LINE 1.5 ETSI EU6EB",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 22184,
+   "arf": 23058,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "VOLKSWAGEN TIGUAN 1.5 LIFE ETSI EU6EB",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 28451,
+   "arf": 31832,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "VOLKSWAGEN TIGUAN 1.5 LIFE PLUS ETSI NAVI",
+   "fuel": "H",
+   "band": "C1",
+   "omv": 31279,
+   "arf": 35791,
+   "ves": 7500,
+   "eeai": 0
+  },
+  {
+   "model": "VOLVO ES90 PLUS",
+   "fuel": "E",
+   "band": "A",
+   "omv": 48206,
+   "arf": 63592,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "VOLVO ES90 ULTRA",
+   "fuel": "E",
+   "band": "A",
+   "omv": 53999,
+   "arf": 74599,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "VOLVO EX30 PLUS",
+   "fuel": "E",
+   "band": "A",
+   "omv": 25756,
+   "arf": 28059,
+   "ves": -22500,
+   "eeai": -5559
+  },
+  {
+   "model": "VOLVO EX30 ULTRA",
+   "fuel": "E",
+   "band": "A",
+   "omv": 31351,
+   "arf": 35892,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "VOLVO EX40 ULTRA",
+   "fuel": "E",
+   "band": "A",
+   "omv": 35256,
+   "arf": 41359,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "VOLVO EX90 PLUS",
+   "fuel": "E",
+   "band": "A",
+   "omv": 58556,
+   "arf": 83257,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "VOLVO XC40 B4 PLUS",
+   "fuel": "H",
+   "band": "C2",
+   "omv": 25706,
+   "arf": 27989,
+   "ves": 22500,
+   "eeai": 0
+  },
+  {
+   "model": "VOLVO XC60 T8 PLUS",
+   "fuel": "R",
+   "band": "B",
+   "omv": 43056,
+   "arf": 53807,
+   "ves": 0,
+   "eeai": 0
+  },
+  {
+   "model": "VOLVO XC90 B5 ULTRA",
+   "fuel": "H",
+   "band": "C3",
+   "omv": 43906,
+   "arf": 55422,
+   "ves": 35000,
+   "eeai": 0
+  },
+  {
+   "model": "XPENG G6 AIR RWD (STD)",
+   "fuel": "E",
+   "band": "A",
+   "omv": 33838,
+   "arf": 39374,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "XPENG G6 PRO RWD (LR)",
+   "fuel": "E",
+   "band": "A",
+   "omv": 36626,
+   "arf": 43277,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "XPENG X9 PRO FWD (LONG RANGE)",
+   "fuel": "E",
+   "band": "A",
+   "omv": 66895,
+   "arf": 103238,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "XPENG X9 PRO FWD (STANDARD RANGE)",
+   "fuel": "E",
+   "band": "A",
+   "omv": 64195,
+   "arf": 96488,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "ZEEKR 009 FWD (7-SEATER)",
+   "fuel": "E",
+   "band": "A",
+   "omv": 68592,
+   "arf": 107480,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "ZEEKR 7X AWD PERFORMANCE",
+   "fuel": "E",
+   "band": "A",
+   "omv": 50206,
+   "arf": 67392,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "ZEEKR 7X RWD (LR)",
+   "fuel": "E",
+   "band": "A",
+   "omv": 46428,
+   "arf": 60214,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "ZEEKR 7X RWD (STD)",
+   "fuel": "E",
+   "band": "A",
+   "omv": 40890,
+   "arf": 49691,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "ZEEKR X RWD (110 KW)",
+   "fuel": "E",
+   "band": "A",
+   "omv": 34173,
+   "arf": 39843,
+   "ves": -22500,
+   "eeai": -7500
+  },
+  {
+   "model": "ZEEKR X RWD",
+   "fuel": "E",
+   "band": "A",
+   "omv": 37008,
+   "arf": 43812,
+   "ves": -22500,
+   "eeai": -7500
+  }
+ ]
+}
