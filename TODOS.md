@@ -20,6 +20,6 @@
 - **What:** add COEs returning at year 15 (5-year renewals), at year 20 (10-year renewals) and from early deregistrations to the supply radar.
 - **Why:** v1 counts only cars reaching 10 years and states the exclusion; these flows add supply the bars miss.
 - **Pros:** a more accurate radar and a smaller published hindcast error.
-- **Cons:** depends on DataMall publishing deregistration statistics, which hasn't been confirmed.
+- **Cons:** monthly deregistrations aren't split by cause, so early deregistrations have to be inferred (total deregistrations minus cohort expiries).
 - **Context:** design doc line 91 (stated exclusion); eng review D23.
 - **Depends on / blocked by:** unblocked (T1, 2026-10-31): DataMall publishes monthly deregistrations and 5-/10-year COE revalidations by category, both already in `data/`.
