@@ -35,3 +35,12 @@ export function latestPremium(category: "A" | "B" | "E"): number {
   const e = latestExercise();
   return history.premium(e, category) ?? 0;
 }
+
+/** The lowest and highest premium for a category since `sinceMonth`, for a sense of how far premiums swing. */
+export function premiumRange(category: "A" | "B", sinceMonth: string): { low: { premium: number; month: string }; high: { premium: number; month: string } } {
+  const rows = data.coe.rows.filter((r) => r.category === category && r.month >= sinceMonth && r.premium > 0);
+  const pick = (better: (a: number, b: number) => boolean) => rows.reduce((a, r) => (better(r.premium, a.premium) ? r : a));
+  const low = pick((a, b) => a < b);
+  const high = pick((a, b) => a > b);
+  return { low: { premium: low.premium, month: low.month }, high: { premium: high.premium, month: high.month } };
+}

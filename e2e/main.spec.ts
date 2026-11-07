@@ -31,7 +31,35 @@ test("first visit answers for an example car, before any input", async ({ page }
   await expect(hero.locator(".huge")).toHaveText("23 months");
   await expect(hero.locator(".bars li")).toHaveCount(4);
   await expect(hero.locator(".bars li.best")).toHaveCount(1);
-  await expect(hero.locator(".verdict-line")).toContainText("At today's prices");
+  await expect(hero.locator(".verdict-line")).toContainText("If premiums stay at today's level");
+});
+
+test("the premium setting reruns the plans and says what it implies", async ({ page }) => {
+  const hero = page.locator("section[aria-labelledby=s1]");
+  await expect(hero.locator(".trend")).toContainText("stay at today's level");
+  await hero.locator("input[name=premiumTrend]").fill("5");
+  await expect(hero.locator(".verdict-line")).toContainText("If premiums rise 5% a year");
+  await expect(hero.locator(".trend")).toContainText("rise 5% a year");
+  await expect(hero.locator(".trend > p.hint")).toContainText("Over the past 10 years");
+  await hero.locator("input[name=premiumTrend]").fill("-5");
+  await expect(hero.locator(".verdict-line")).toContainText("If premiums fall 5% a year");
+  await expect(hero.locator(".break-even")).toContainText("Renewing wins only while");
+});
+
+test("a used next car gets a suggested price range and flows into the plans", async ({ page }) => {
+  const hero = page.locator("section[aria-labelledby=s1]");
+  const s3 = page.locator("section[aria-labelledby=s3]");
+  await s3.getByRole("radio", { name: "Used", exact: true }).click();
+  await expect(s3.locator(".results")).toContainText("Suggested price today");
+  await expect(s3.locator(".results .big").first()).toHaveText(/^\$[\d,]+ – \$[\d,]+$/);
+  await expect(hero.locator(".bars")).toContainText("used Honda HR-V 1.5 DX with 5 years of COE");
+  await expect(hero.locator("select[name=heroKind]")).toHaveValue("used");
+
+  await s3.locator("select[name=usedYearsLeft]").selectOption("2");
+  await expect(s3.locator(".form")).toContainText("about 8 years old");
+  await fill(page, "usedPrice", "200,000");
+  await expect(s3.locator(".results")).toContainText("above the range");
+  await expect(s3.locator(".results")).toContainText("Asking price $200,000");
 });
 
 test("only the expiry date is needed; the rest is estimated and says so", async ({ page }) => {

@@ -156,6 +156,13 @@ footer { color: var(--muted); font-size: 0.8rem; }
 .explore h3 { margin: 0 0 8px; font-size: 1.05rem; font-weight: 500; }
 .slider { display: flex; align-items: center; gap: 10px; }
 .slider input[type="range"] { flex: 1; height: 28px; }
+.trend { margin-top: 14px; background: var(--card); border: 1px solid var(--hero-edge); border-radius: 10px; padding: 12px 16px; }
+.trend .kicker strong { color: var(--ink); text-transform: none; letter-spacing: 0; font-size: 0.95rem; }
+.break-even { font-size: 0.9rem; line-height: 1.45; margin: 0 0 8px; padding: 8px 10px; border-left: 3px solid var(--accent); background: var(--card); border-radius: 0 6px 6px 0; }
+.car-pick { display: flex; gap: 6px; min-width: 0; }
+.car-pick select:first-child { flex: 1; min-width: 0; }
+.car-pick select:last-child { flex: none; }
+label.check { display: flex; gap: 8px; align-items: flex-start; font-size: 0.9rem; }
 .readouts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 12px 0 4px; }
 .readout .kicker { margin-top: 0; }
 .readout .big { font-size: 1.3rem; }

@@ -7,8 +7,8 @@ import type { RuleSet } from "../rules/index";
 import type { Radar } from "../model/radar";
 import { buyPoints, decide, supplyAt, yearsBetween, type Decision, type NewCarCost, type SupplyReading } from "./decision";
 import { h, longDate, money, monthLabel, signedMoney } from "./dom";
-import { latestPqp } from "./data";
-import { presetById, type NextCarState } from "./nextCar";
+import { latestPqp, latestPremium, premiumRange } from "./data";
+import { carName, premiumAt, presetById, type NextCarState } from "./nextCar";
 import type { ValidCar } from "./profile";
 
 export interface HeroContext {
@@ -18,9 +18,12 @@ export interface HeroContext {
   /** Supply radar for the next car's category. */
   radar: Radar;
   width: number;
+  /** Changes the next car's settings; here, only the premium trend. */
+  onNextCar: (s: NextCarState) => void;
 }
 
 const monthOf = (date: string) => monthLabel(date.slice(0, 7));
+const capitalised = (s: string) => s[0]!.toUpperCase() + s.slice(1);
 
 /** The answer for an owner: countdown, verdict, plan bars, and the "switch in" slider. */
 export function ownerAnswer(valid: ValidCar, example: boolean, ctx: HeroContext, switchAt: string | undefined, onSwitch: (date: string) => void): HTMLElement {
@@ -30,15 +33,17 @@ export function ownerAnswer(valid: ValidCar, example: boolean, ctx: HeroContext,
   const now = d.points[0]!;
   const atExpiry = d.points.at(-1)!;
   const months = Math.round(yearsBetween(ctx.today, car.coeExpiryDate) * 12);
-  const label = presetById(ctx.nextCar.presetId).label;
+  const name = carName(ctx.nextCar);
+  const Name = capitalised(name);
 
   const plans = [
-    { id: "now", title: "Switch now", detail: `New ${label} today`, perYear: now.perYear },
-    ...(d.points.length > 1 ? [{ id: "expiry", title: "Keep it to expiry, then switch", detail: `New ${label} in ${monthOf(atExpiry.date)}`, perYear: atExpiry.perYear }] : []),
+    { id: "now", title: "Switch now", detail: `${Name} today`, perYear: now.perYear },
+    ...(d.points.length > 1 ? [{ id: "expiry", title: "Keep it to expiry, then switch", detail: `${Name} in ${monthOf(atExpiry.date)}`, perYear: atExpiry.perYear }] : []),
     ...[...d.renewals]
       .sort((a, b) => a.termYears - b.termYears)
-      .map((r) => ({ id: `renew${r.termYears}`, title: `Renew ${r.termYears} years, then switch`, detail: `${money(r.renewalCost)} to renew; new ${label} in ${monthOf(r.until)}`, perYear: r.perYear })),
+      .map((r) => ({ id: `renew${r.termYears}`, title: `Renew ${r.termYears} years, then switch`, detail: `${money(r.renewalCost)} to renew; ${name} in ${monthOf(r.until)}`, perYear: r.perYear })),
   ];
+  const horizon = [atExpiry.date, ...d.renewals.map((r) => r.until)].sort().at(-1)!;
   const bestId = !d.best ? undefined : d.best.kind === "renew" ? `renew${d.best.plan.termYears}` : d.best.point === now ? "now" : d.best.point === atExpiry ? "expiry" : undefined;
 
   return h(
@@ -58,33 +63,92 @@ export function ownerAnswer(valid: ValidCar, example: boolean, ctx: HeroContext,
       h(
         "div",
         { class: "verdict" },
-        h("p", { class: "verdict-line" }, ...verdict(d, now, atExpiry)),
+        h("p", { class: "verdict-line" }, ...verdict(d, now, atExpiry, ctx.nextCar.premiumTrend)),
         d.best ? bars(plans, bestId) : null,
+        d.upkeepBreakEven ? breakEven(d.upkeepBreakEven, atExpiry, now) : null,
         d.best
           ? h(
               "p",
               { class: "hint" },
-              "Cost per year of road access, at today's premiums and prices. Excludes repairs, fuel, insurance and loan interest; an older car usually costs more to run.",
-              [...d.points, ...d.renewals].some((x) => x.newCar?.assumed) ? " No VES or EEAI has been announced after 2027, so a car bought later is priced with none." : "",
+              "Cost per year of road access. Car prices and renewal costs follow the premium setting below. Excludes repairs, fuel, insurance and loan interest.",
+              [...d.points, ...d.renewals].some((x) => x.newCar?.assumed) ? " No VES or EEAI has been announced after 2027, so a new car bought later is priced with none." : "",
             )
           : null,
       ),
     ),
+    d.best ? trendControl(ctx, presetById(ctx.nextCar.presetId).category as "A" | "B", horizon) : null,
     d.points.length > 1 ? switchExplorer(d, ctx, switchAt, onSwitch) : null,
   );
 }
 
-function verdict(d: Decision, now: Decision["points"][number], atExpiry: Decision["points"][number]): (string | Node)[] {
-  if (!d.best) return ["Enter a dealer's quote for your next car (below) to compare plans."];
+/** "If premiums stay at today's level", "If premiums rise 3% a year". */
+export function premise(trend: number): string {
+  const pct = Math.round(Math.abs(trend) * 100);
+  return pct === 0 ? "If premiums stay at today's level" : `If premiums ${trend > 0 ? "rise" : "fall"} ${pct}% a year`;
+}
+
+function verdict(d: Decision, now: Decision["points"][number], atExpiry: Decision["points"][number], trend: number): (string | Node)[] {
+  if (!d.best) return ["Enter a price for your next car (below) to compare plans."];
   const strong = (s: string) => h("strong", {}, s);
+  const lead = `${premise(trend)}, `;
   if (d.best.kind === "renew") {
     const p = d.best.plan;
-    return ["At today's prices, ", strong(`renewing for ${p.termYears} years`), ` is the cheapest way to keep driving: ${money(p.perYear!)} a year, against ${money(atExpiry.perYear!)} for switching when your COE expires.`];
+    return [lead, strong(`renewing for ${p.termYears} years`), ` is the cheapest way to keep driving: ${money(p.perYear!)} a year, against ${money(atExpiry.perYear!)} for switching when your COE expires.`];
   }
   const p = d.best.point;
-  if (p === now) return ["At today's prices, ", strong("switching now"), ` is cheapest: ${money(p.perYear!)} a year.`];
+  if (p === now) return [lead, strong("switching now"), ` is cheapest: ${money(p.perYear!)} a year.`];
   const when = p === atExpiry ? "keeping your car until its COE expires" : `switching in ${monthOf(p.date)}`;
-  return ["At today's prices, ", strong(when), ` is cheapest: ${money(p.perYear!)} a year, against ${money(now.perYear!)} for switching now.`];
+  return [lead, strong(when), ` is cheapest: ${money(p.perYear!)} a year, against ${money(now.perYear!)} for switching now.`];
+}
+
+/** Renewing looks cheapest only because an older car's extra running costs are left out; say how much they'd have to be. */
+function breakEven(b: NonNullable<Decision["upkeepBreakEven"]>, atExpiry: Decision["points"][number], now: Decision["points"][number]): HTMLElement {
+  const switchWhen = b.versus === atExpiry ? "switching at expiry" : b.versus === now ? "switching now" : `switching in ${monthOf(b.versus.date)}`;
+  return h(
+    "p",
+    { class: "break-even" },
+    `Renewing wins only while your car, past 10 years old, costs less than `,
+    h("strong", {}, `${money(b.perYear)} a year`),
+    ` more to run than a newer one. That covers repairs and road tax, which rises by up to 50% for cars over 10 years old. Above that, ${switchWhen} is cheaper.`,
+  );
+}
+
+/** The one forecast the visitor makes: where premiums go from here. Moves car prices, used values and renewal costs. */
+function trendControl(ctx: HeroContext, category: "A" | "B", horizon: string): HTMLElement {
+  const since = `${Number(ctx.today.slice(0, 4)) - 10}${ctx.today.slice(4, 7)}`;
+  const range = premiumRange(category, since);
+  const value = h("strong", {}, "");
+  const note = h("p", { class: "hint" }, "");
+  const show = (trend: number) => {
+    value.textContent = premise(trend).replace(/^If premiums /, "");
+    note.textContent =
+      (trend ? `Cat ${category} would be about ${money(premiumAt(category, ctx.today, horizon, trend))} in ${monthOf(horizon)}, against ${money(latestPremium(category))} now. ` : `Cat ${category} is ${money(latestPremium(category))} now. `) +
+      `Over the past 10 years it has run from ${money(range.low.premium)} (${monthLabel(range.low.month)}) to ${money(range.high.premium)} (${monthLabel(range.high.month)}).`;
+  };
+  show(ctx.nextCar.premiumTrend);
+  return h(
+    "div",
+    { class: "trend" },
+    h("div", { class: "kicker" }, "COE premiums from here: ", value),
+    h(
+      "div",
+      { class: "slider" },
+      h("span", { class: "hint" }, "−10%/yr"),
+      h("input", {
+        type: "range",
+        name: "premiumTrend",
+        min: -10,
+        max: 10,
+        step: 1,
+        value: Math.round(ctx.nextCar.premiumTrend * 100),
+        "aria-label": "Yearly change in COE premiums",
+        oninput: (e: Event) => show(Number((e.target as HTMLInputElement).value) / 100),
+        onchange: (e: Event) => ctx.onNextCar({ ...ctx.nextCar, premiumTrend: Number((e.target as HTMLInputElement).value) / 100 }),
+      }),
+      h("span", { class: "hint" }, "+10%/yr"),
+    ),
+    note,
+  );
 }
 
 function bars(plans: { id: string; title: string; detail: string; perYear?: number }[], bestId: string | undefined): HTMLElement {
@@ -116,9 +180,14 @@ function supplyReadout(r: SupplyReading | undefined): string {
   return r ? `${monthLabel(r.quarterStart)} quarter` : "";
 }
 
-function arfNote(c: NewCarCost | undefined): string | null {
-  if (!c || c.arfChange === 0) return null;
-  return `ARF and VES ${signedMoney(c.arfChange)} vs buying today${c.assumed ? " (no VES or EEAI announced after 2027: assumed none)" : ""}.`;
+/** What moves the next car's price between today and its purchase date. */
+function priceNote(c: NewCarCost | undefined): string {
+  if (!c) return "";
+  const parts = [
+    c.premiumChange ? `premium ${signedMoney(c.premiumChange)}` : "",
+    c.arfChange ? `ARF and VES ${signedMoney(c.arfChange)}${c.assumed ? " (no VES or EEAI announced after 2027: assumed none)" : ""}` : "",
+  ].filter(Boolean);
+  return parts.length ? `${parts.join(", ")} vs buying today.` : "Same as buying today.";
 }
 
 function switchExplorer(d: Decision, ctx: HeroContext, switchAt: string | undefined, onSwitch: (date: string) => void): HTMLElement {
@@ -135,7 +204,7 @@ function switchExplorer(d: Decision, ctx: HeroContext, switchAt: string | undefi
     heading.replaceChildren("What if you switch in ", h("strong", {}, monthOf(p.date)), "?");
     readouts.replaceChildren(
       readout("LTA pays you back", money(p.payback), index === 0 ? "PARF + COE rebate, today" : `${money(p.waitCost)} less than today: the cost of keeping it till then`),
-      readout("Next car", p.newCar ? money(p.newCar.price) : "—", arfNote(p.newCar) ?? "Same as today: premiums held at today's level"),
+      readout("Next car", p.newCar ? money(p.newCar.price) : "—", priceNote(p.newCar)),
       readout(`Cat ${category} supply`, supplyAt(ctx.radar, p.date)?.quota.toLocaleString("en-SG") ?? "—", supplyLine(ctx.radar, ctx.today, p.date, category) ?? "", supplyReadout(supplyAt(ctx.radar, p.date))),
       readout("All in", p.perYear === undefined ? "—" : `${money(p.perYear)}/yr`, `Over ${(yearsBetween(ctx.today, p.date) + d.holdingYears).toFixed(1)} years of driving`),
     );
@@ -210,7 +279,7 @@ export function buyerAnswer(targetMonth: string | undefined, ctx: HeroContext, o
   const preset = presetById(ctx.nextCar.presetId);
   const points = buyPoints(ctx.nextCar, ctx.rules, ctx.today);
   if (points[0]!.newCar === undefined)
-    return h("div", { class: "answer-wrap" }, h("p", { class: "verdict-line" }, `LTA's table has no price for the ${preset.label}. Enter a dealer's quote below to see what it costs a year.`));
+    return h("div", { class: "answer-wrap" }, h("p", { class: "verdict-line" }, `LTA's table has no price for the ${preset.label}. Enter a price below to see what it costs a year.`));
   let index = targetMonth ? points.findIndex((p) => p.date.slice(0, 7) === targetMonth) : 0;
   if (index < 0) index = 0;
 
@@ -225,9 +294,13 @@ export function buyerAnswer(targetMonth: string | undefined, ctx: HeroContext, o
       h(
         "div",
         { class: "countdown" },
-        h("div", { class: "kicker" }, `${preset.label}, bought ${monthOf(p.date)}`),
+        h("div", { class: "kicker" }, `${capitalised(carName(ctx.nextCar))}, bought ${monthOf(p.date)}`),
         h("div", { class: "huge" }, `${money(p.perYear!)}/yr`),
-        h("p", { class: "sub" }, `for ${ctx.nextCar.holdingYears} years of driving: ${money(p.newCar!.price)} less ${money(p.newCar!.resale)} back when you sell.`),
+        h(
+          "p",
+          { class: "sub" },
+          `for ${p.newCar!.years} years of driving: ${money(p.newCar!.price)} less ${money(p.newCar!.resale)} back ${ctx.nextCar.kind === "used" ? "from LTA when its COE runs out" : "when you sell"}.`,
+        ),
       ),
       h(
         "div",
@@ -235,16 +308,22 @@ export function buyerAnswer(targetMonth: string | undefined, ctx: HeroContext, o
         h(
           "p",
           { class: "verdict-line" },
-          ...(cheapest.perYear! < p.perYear! - 1
-            ? ["Under today's rules, buying in ", h("strong", {}, monthOf(cheapest.date)), ` would be ${money(p.perYear! - cheapest.perYear!)} a year cheaper, from the ARF and VES rules in force then${cheapest.newCar!.assumed ? " (no VES or EEAI has been announced after 2027, so none is assumed)" : ""}.`]
-            : ["Under today's rules, no month in the next three years is cheaper for this car. Premiums are held at today's level; the supply chart below shows why they may move."]),
+          // Under $100 a year is rounding in the dates, not a reason to wait.
+          ...(cheapest.perYear! <= p.perYear! - 100
+            ? [
+                `${premise(ctx.nextCar.premiumTrend)}, buying in `,
+                h("strong", {}, monthOf(cheapest.date)),
+                ` would be ${money(p.perYear! - cheapest.perYear!)} a year cheaper`,
+                cheapest.newCar!.arfChange !== p.newCar!.arfChange ? `, partly from the ARF and VES rules in force then${cheapest.newCar!.assumed ? " (no VES or EEAI has been announced after 2027, so none is assumed)" : ""}.` : ".",
+              ]
+            : [`${premise(ctx.nextCar.premiumTrend)}, no month in the next three years is cheaper for this car.`]),
         ),
         h("p", { class: "hint" }, "Excludes fuel, insurance and loan interest. The loan is worked out under Your next car."),
       ),
     );
     heading.replaceChildren("What if you buy in ", h("strong", {}, monthOf(p.date)), "?");
     readouts.replaceChildren(
-      readout("Price", money(p.newCar!.price), arfNote(p.newCar) ?? "Same as today: premiums held at today's level"),
+      readout("Price", money(p.newCar!.price), priceNote(p.newCar)),
       readout(`Cat ${preset.category} supply`, supplyAt(ctx.radar, p.date)?.quota.toLocaleString("en-SG") ?? "—", supplyLine(ctx.radar, ctx.today, p.date, preset.category) ?? "", supplyReadout(supplyAt(ctx.radar, p.date))),
     );
     const rows = points.map((q) => ({ date: new Date(`${q.date}T00:00:00Z`), perYear: q.perYear! }));
@@ -286,5 +365,6 @@ export function buyerAnswer(targetMonth: string | undefined, ctx: HeroContext, o
     { class: "answer-wrap" },
     main,
     h("div", { class: "explore" }, heading, h("div", { class: "slider" }, h("span", { class: "hint" }, "Now"), slider, h("span", { class: "hint" }, "+3 years")), readouts, chart),
+    trendControl(ctx, preset.category as "A" | "B", points.at(-1)!.date),
   );
 }

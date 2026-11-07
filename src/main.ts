@@ -9,7 +9,7 @@ import { staleness } from "./ui/stale";
 import { yourCarForm, yourCarResults } from "./ui/yourCar";
 import { supplySection, type SupplyView } from "./ui/supply";
 import { premiumsSection } from "./ui/premiums";
-import { carSelect, defaultNextCar, nextCarFigures, nextCarSection, presetById, type NextCarState } from "./ui/nextCar";
+import { carSelect, defaultNextCar, kindSelect, nextCarFigures, nextCarSection, presetById, type NextCarState } from "./ui/nextCar";
 import { plansSection } from "./ui/plans";
 import { buyerAnswer, ownerAnswer } from "./ui/hero";
 import { decodeScenario, encodeScenario } from "./ui/share";
@@ -92,7 +92,10 @@ function render(): void {
         })
       : [];
 
-  const heroCtx = { rules, today, nextCar: state.nextCar, radar: supply[nextCategory], width: width - 48 };
+  const setNextCar = (nextCar: NextCarState) => update({ nextCar });
+  const heroCtx = { rules, today, nextCar: state.nextCar, radar: supply[nextCategory], width: width - 48, onNextCar: setNextCar };
+  // The car picker comes first, so the field's label names it.
+  const heroCar = h("div", { class: "car-pick" }, carSelect(state.nextCar, setNextCar, "heroPreset"), kindSelect(state.nextCar, setNextCar, "heroKind"));
   const answer =
     p.mode === "first"
       ? buyerAnswer(/^\d{4}-\d{2}$/.test(p.targetMonth) ? p.targetMonth : undefined, heroCtx, (targetMonth) => update({ profile: { ...p, targetMonth } }))
@@ -113,7 +116,7 @@ function render(): void {
       state.shared
         ? h("div", { class: "banner", role: "status" }, "You opened a shared scenario. Your own saved car is untouched unless you edit this one. ", h("button", { type: "button", class: "link", onclick: () => backToMyCar() }, "Back to my car"))
         : null,
-      yourCarForm(p, errors, (profile) => update({ profile }), carSelect(state.nextCar, (nextCar) => update({ nextCar }), "heroPreset"), valid && !example ? valid.estimates.length : 0),
+      yourCarForm(p, errors, (profile) => update({ profile }), heroCar, valid && !example ? valid.estimates.length : 0),
       example ? h("p", { class: "example-note" }, "Showing an example car whose COE expires in 23 months. Enter your expiry date to see yours.") : null,
       answer,
       valid ? h("details", { class: "method" }, h("summary", {}, "Behind these numbers"), yourCarResults(valid, rules)) : null,
@@ -137,7 +140,7 @@ function render(): void {
       premiumsSection(nextCategory, window, width - 48),
       supplySection(supply, state.supplyView ?? nextCategory, (supplyView) => update({ supplyView }), window, width - 48),
     ),
-    h("section", { class: "card", "aria-labelledby": "s3" }, h("h2", { id: "s3" }, "Your next car"), nextCarSection(state.nextCar, rules, purchaseDate, (nextCar) => update({ nextCar }))),
+    h("section", { class: "card", "aria-labelledby": "s3" }, h("h2", { id: "s3" }, "Your next car"), nextCarSection(state.nextCar, rules, today, purchaseDate, setNextCar)),
     h(
       "section",
       { class: "card", "aria-labelledby": "s4" },
