@@ -183,3 +183,7 @@ h3.takeaway { font-size: 1.12rem; line-height: 1.35; margin: 2px 0 10px; font-we
 .sw.rule { border-left: 1px dashed var(--muted); width: 1px; height: 12px; }
 .card h2 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 4px; }
 .sw.dash { border-top: 2px dashed var(--p1); height: 0; }
+.trend .kicker + .slider { margin-top: 2px; }
+.trend .hint + .kicker { margin-top: 12px; }
+.money-row { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 12px; font-size: 0.9rem; align-items: center; }
+.money-row input, .money-row select { margin-left: 4px; }

@@ -31,19 +31,32 @@ test("first visit answers for an example car, before any input", async ({ page }
   await expect(hero.locator(".huge")).toHaveText("23 months");
   await expect(hero.locator(".bars li")).toHaveCount(4);
   await expect(hero.locator(".bars li.best")).toHaveCount(1);
-  await expect(hero.locator(".verdict-line")).toContainText("If premiums stay at today's level");
+  await expect(hero.locator(".verdict-line")).toContainText("If premiums keep pace with inflation");
+  await expect(hero.locator(".bars")).toContainText("LTA would pay at expiry is gone");
 });
 
-test("the premium setting reruns the plans and says what it implies", async ({ page }) => {
+test("the assumptions rerun the plans and say what they imply", async ({ page }) => {
   const hero = page.locator("section[aria-labelledby=s1]");
-  await expect(hero.locator(".trend")).toContainText("stay at today's level");
+  // At the defaults the example car's renewal and switch come out within 3% of each other.
+  await expect(hero.locator(".verdict-line")).toContainText("cost about the same");
+  await expect(hero.locator(".trend")).toContainText("keep pace with inflation");
   await hero.locator("input[name=premiumTrend]").fill("5");
-  await expect(hero.locator(".verdict-line")).toContainText("If premiums rise 5% a year");
-  await expect(hero.locator(".trend")).toContainText("rise 5% a year");
-  await expect(hero.locator(".trend > p.hint")).toContainText("Over the past 10 years");
+  await expect(hero.locator(".verdict-line")).toContainText("If premiums beat inflation by 5% a year");
+  await expect(hero.locator(".trend > p.hint").first()).toContainText("Over the past 10 years");
   await hero.locator("input[name=premiumTrend]").fill("-5");
-  await expect(hero.locator(".verdict-line")).toContainText("If premiums fall 5% a year");
-  await expect(hero.locator(".break-even")).toContainText("Renewing wins only while");
+  await expect(hero.locator(".verdict-line")).toContainText("If premiums trail inflation by 5% a year");
+  await expect(hero.locator(".break-even")).toContainText("Renewing stays cheapest only while");
+
+  await hero.locator("input[name=premiumTrend]").fill("0");
+  await hero.locator("input[name=repairRise]").fill("1000");
+  await expect(hero.locator(".trend")).toContainText("$5,000 a year more to keep running at 10 years old");
+  await expect(hero.locator(".bars li.best")).not.toContainText("Renew");
+  await expect(hero.locator(".break-even")).toContainText("Renewing would be cheapest if repair bills climbed by less than");
+  await hero.locator("select[name=interest]").selectOption("6");
+  await expect(hero.locator(".trend")).toContainText("With interest at 6% and inflation at 2%, money spent later costs less");
+  await hero.locator("input[name=roadTax]").fill("1,500");
+  await hero.locator("input[name=roadTax]").blur();
+  await expect(hero.locator("input[name=roadTax]")).toHaveValue("1,500");
 });
 
 test("a used next car gets a suggested price range and flows into the plans", async ({ page }) => {

@@ -21,8 +21,15 @@ export interface NextCarState {
   loanAmount: string;
   tenureMonths: number;
   flatRate: number;
-  /** Assumed change in COE premiums a year from today, e.g. 0.03 for +3%. */
+  /** Assumed change in COE premiums a year from today, after inflation, e.g. 0.03 for 3% a year faster than prices in general. */
   premiumTrend: number;
+  /** How much more a year a car costs to keep running for each year it is past 5 years old, in today's dollars. */
+  repairRise: number;
+  /** The current car's road tax a year, as typed; blank takes a typical car of its category. */
+  roadTax: string;
+  /** What money earns (or a loan costs) a year, and how fast prices in general rise: e.g. 0.03 and 0.02. */
+  interest: number;
+  inflation: number;
   /** A used car: whole years of COE left when bought, whether that COE is a 10-year renewal, and what's typed from the listing. */
   usedYearsLeft: number;
   usedRenewed: boolean;
@@ -51,6 +58,10 @@ export function defaultNextCar(): NextCarState {
     tenureMonths: 84,
     flatRate: defaultRate(preset.electric),
     premiumTrend: 0,
+    repairRise: 300,
+    roadTax: "",
+    interest: 0.03,
+    inflation: 0.02,
     usedYearsLeft: 5,
     usedRenewed: false,
     usedPrice: "",

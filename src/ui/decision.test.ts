@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { addYears, rulesAt, type CurrentCar } from "../rules/index";
 import { radar } from "../model/radar";
 import { data, latestPremium } from "./data";
-import { buyPoints, decide, newCarCost, supplyAt, switchDates, yearsBetween } from "./decision";
+import { buyPoints, decide, discounting, newCarCost, supplyAt, switchDates, TYPICAL_ROAD_TAX, yearsBetween } from "./decision";
 import { defaultNextCar, nextCarFigures, premiumAt, usedCarFigures } from "./nextCar";
 
 const TODAY = "2026-11-07";
@@ -15,8 +15,10 @@ const car: CurrentCar = {
   arfPaid: 20000,
   quotaPremiumPaid: 26000,
 };
-const hrv = { ...defaultNextCar(), presetId: "honda-hrv-15-dx-sin" };
-const atto3 = { ...defaultNextCar(), presetId: "byd-atto-3-evo-dynamic" };
+/** No interest, inflation, repairs or road tax: each plan's cost per year is its total cost over its total years. */
+const plain = { interest: 0, inflation: 0, repairRise: 0, roadTax: "0" };
+const hrv = { ...defaultNextCar(), ...plain, presetId: "honda-hrv-15-dx-sin" };
+const atto3 = { ...defaultNextCar(), ...plain, presetId: "byd-atto-3-evo-dynamic" };
 
 describe("switchDates", () => {
   it("runs monthly on the expiry's day, from today to the expiry date", () => {
@@ -98,14 +100,59 @@ describe("premium trend", () => {
     expect(rising.renewals[0]!.renewalCost).toBeCloseTo(flat.renewals[0]!.renewalCost * growth, -1);
   });
 
-  it("says how much extra upkeep a renewed car could take before the cheapest switch wins", () => {
+});
+
+describe("running costs and money over time", () => {
+  const span = (until: string) => yearsBetween(TODAY, until) + 10;
+
+  it("charges LTA's road tax surcharge on the years a renewal adds", () => {
+    const flat = decide(car, hrv, rules, TODAY, 129883);
+    const taxed = decide(car, { ...hrv, roadTax: "1000" }, rules, TODAY, 129883);
+    // Past 10: 10%, 20%, 30%, 40%, then 50% for the last six years of a 10-year renewal.
+    const r10 = (d: typeof flat) => d.renewals.find((r) => r.termYears === 10)!;
+    expect((r10(taxed).perYear! - r10(flat).perYear!) * span(r10(flat).until)).toBeCloseTo(1000 * 4.0, -2);
+    expect(taxed.points.at(-1)!.perYear).toBeCloseTo(flat.points.at(-1)!.perYear!, 6);
+    expect(decide(car, { ...hrv, roadTax: "" }, rules, TODAY, 129883).roadTax).toBe(TYPICAL_ROAD_TAX.A);
+  });
+
+  it("adds repairs that climb with each year a car is past 5, for the current car and the next", () => {
+    const d = decide(car, { ...hrv, repairRise: 300 }, rules, TODAY, 129883);
+    const r10 = d.renewals.find((r) => r.termYears === 10)!;
+    const ageNow = yearsBetween(car.registrationDate, TODAY);
+    // Current car from its age today to 20, then the new car from 5 to 10.
+    const area = (20 - 5) ** 2 / 2 - (ageNow - 5) ** 2 / 2 + 12.5;
+    expect(r10.value!.perRise).toBeCloseTo(area, 0);
+    expect(r10.perYear).toBeCloseTo(decide(car, hrv, rules, TODAY, 129883).renewals[0]!.perYear! + (300 * r10.value!.perRise) / span(r10.until), 6);
+  });
+
+  it("finds the repair figure where the cheapest renewal and the cheapest switch cost the same", () => {
     const d = decide(car, hrv, rules, TODAY, 129883);
     expect(d.best?.kind).toBe("renew");
-    const b = d.upkeepBreakEven!;
-    const span = yearsBetween(TODAY, b.plan.until) + d.holdingYears;
-    expect(b.perYear).toBeGreaterThan(0);
-    expect(b.plan.perYear! + (b.perYear * b.plan.termYears) / span).toBeCloseTo(b.versus.perYear!, 6);
-    expect(decide(car, { ...hrv, premiumTrend: 0.05 }, rules, TODAY, 129883).upkeepBreakEven).toBeUndefined();
+    const at = decide(car, { ...hrv, repairRise: d.repairBreakEven! }, rules, TODAY, 129883);
+    const cheapest = (xs: { perYear?: number }[]) => Math.min(...xs.map((x) => x.perYear!));
+    expect(cheapest(at.renewals)).toBeCloseTo(cheapest(at.points), 2);
+    expect(decide(car, { ...hrv, repairRise: Math.ceil(d.repairBreakEven!) + 50 }, rules, TODAY, 129883).best?.kind).toBe("switch");
+    expect(decide(car, { ...hrv, premiumTrend: 0.05 }, rules, TODAY, 129883).repairBreakEven).toBeUndefined();
+  });
+
+  it("keeps prices level in today's dollars but shrinks LTA's fixed-dollar paybacks with inflation", () => {
+    const inflated = { ...hrv, interest: 0.02, inflation: 0.02 };
+    const now = decide(car, inflated, rules, TODAY, 129883).points[0]!;
+    const c = now.newCar!;
+    expect(now.perYear).toBeCloseTo((c.price - c.resale / 1.02 ** 10) / 10, 0);
+  });
+
+  it("discounts money spent later at the interest rate, net of inflation", () => {
+    const m = discounting({ interest: 0.05, inflation: 0.02 });
+    expect(m.real(10)).toBeCloseTo((1.02 / 1.05) ** 10, 9);
+    expect(m.fixed(10)).toBeCloseTo(1.05 ** -10, 9);
+    expect(m.flow(0, 10)).toBeCloseTo((1 - (1.02 / 1.05) ** 10) / Math.log(1.05 / 1.02), 3);
+    // Renewing defers the next car's price, so a higher rate favours it.
+    const at = (interest: number) => {
+      const d = decide(car, { ...hrv, interest }, rules, TODAY, 129883);
+      return d.renewals[0]!.perYear! - d.points.at(-1)!.perYear!;
+    };
+    expect(at(0.05)).toBeLessThan(at(0));
   });
 });
 

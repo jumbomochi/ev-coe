@@ -1,0 +1,12 @@
+{
+  "source": "https://onemotoring.lta.gov.sg/content/onemotoring/home/owning/ongoing-car-costs/road-tax.html",
+  "checked": "2026-11-07",
+  "note": "Surcharge on top of a vehicle's road tax once it is more than the given age (years from original registration).",
+  "surcharge": [
+    { "olderThanYears": 10, "rate": 0.1 },
+    { "olderThanYears": 11, "rate": 0.2 },
+    { "olderThanYears": 12, "rate": 0.3 },
+    { "olderThanYears": 13, "rate": 0.4 },
+    { "olderThanYears": 14, "rate": 0.5 }
+  ]
+}

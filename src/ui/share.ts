@@ -54,6 +54,9 @@ export function decodeScenario(hash: string): Scenario | undefined {
     const fresh = defaultNextCar();
     if (!["new", "used"].includes(nextCar.kind)) nextCar.kind = fresh.kind;
     if (!Number.isFinite(nextCar.premiumTrend) || Math.abs(nextCar.premiumTrend) > 0.1) nextCar.premiumTrend = fresh.premiumTrend;
+    if (!Number.isInteger(nextCar.repairRise) || nextCar.repairRise < 0 || nextCar.repairRise > 1000) nextCar.repairRise = fresh.repairRise;
+    if (!Number.isFinite(nextCar.interest) || nextCar.interest < 0 || nextCar.interest > 0.08) nextCar.interest = fresh.interest;
+    if (!Number.isFinite(nextCar.inflation) || nextCar.inflation < 0 || nextCar.inflation > 0.05) nextCar.inflation = fresh.inflation;
     if (!Number.isInteger(nextCar.usedYearsLeft) || nextCar.usedYearsLeft < 1 || nextCar.usedYearsLeft > 9) nextCar.usedYearsLeft = fresh.usedYearsLeft;
     const switchAt = typeof raw.w === "string" && /^\d{4}-\d{2}-\d{2}$/.test(raw.w) ? raw.w : undefined;
     return { profile, nextCar, switchAt };

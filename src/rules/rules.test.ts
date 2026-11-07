@@ -192,3 +192,10 @@ describe("exerciseForDate", () => {
     expect(exerciseForDate("2026-02-20")).toEqual({ month: "2026-02", bidding: 2 });
   });
 });
+
+describe("road tax surcharge (OneMotoring table)", () => {
+  const rules = rulesAt("2026-11-07");
+  it("starts at 10% once a car is more than 10 years old and stops rising at 50% past 14", () => {
+    expect([9.9, 10, 10.01, 11.5, 12.5, 13.5, 14.01, 20].map((a) => rules.roadTaxSurcharge(a))).toEqual([0, 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.5]);
+  });
+});

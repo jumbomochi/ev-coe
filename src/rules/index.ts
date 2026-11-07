@@ -17,6 +17,7 @@ export { grossArf } from "./arf";
 import { flatRateLoan, loanRules, maxLoan, type FlatRateLoan } from "./loan";
 import { parfRebate } from "./parf";
 import { renewalCategory, renewalOptions, type RenewalOption } from "./renewal";
+import { roadTaxSurcharge } from "./roadTax";
 import type { CurrentCar, Dollars, EmissionBand, Exercise, IsoDate } from "./types";
 
 export type { CoeCategory, CurrentCar, Dollars, EmissionBand, Exercise, IsoDate } from "./types";
@@ -52,6 +53,8 @@ export interface RuleSet {
   newCarParf(car: NewCar, netArfPaid: Dollars, deregistrationDate: IsoDate): Dollars;
   maxLoan(purchasePrice: Dollars, omv: Dollars): Dollars;
   flatRateLoan(principal: Dollars, flatRate: number, tenureMonths: number): FlatRateLoan;
+  /** Road tax surcharge, as a share of the road tax, for a car of this age in years. */
+  roadTaxSurcharge(ageYears: number): number;
 }
 
 /** The exercise a COE bought in a given month most likely came from (2nd exercise if after the 15th). */
@@ -108,5 +111,6 @@ export function rulesAt(asOf: IsoDate): RuleSet {
       }),
     maxLoan: (price, omv) => maxLoan(loan, price, omv),
     flatRateLoan: (principal, rate, months) => flatRateLoan(principal, rate, months, loan),
+    roadTaxSurcharge,
   };
 }
