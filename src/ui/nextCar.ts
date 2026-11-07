@@ -1,11 +1,14 @@
 /** Section 3: your next car — upfront cost, the paper-value floor when you sell, and the loan. */
-import { addDays, addYears, exerciseForDate, type RuleSet } from "../rules/index";
+import { addDays, addYears, exerciseForDate, type EmissionBand, type RuleSet } from "../rules/index";
 import { field, h, longDate, money, signedMoney, source } from "./dom";
 import { latestPremium } from "./data";
 import presets from "./config/presets.json";
 import bankRates from "./config/bank-rates.json";
 
 export type Preset = (typeof presets.presets)[number];
+
+/** The car a fresh visit starts with, and the fallback for an id that's no longer listed. */
+const DEFAULT_PRESET = presets.presets.find((p) => p.id === "honda-hrv-15-dx-sin")!;
 
 export interface NextCarState {
   presetId: string;
@@ -20,12 +23,12 @@ export interface NextCarState {
 }
 
 export function defaultNextCar(): NextCarState {
-  const preset = presets.presets[0]!;
+  const preset = DEFAULT_PRESET;
   return { presetId: preset.id, omvOverride: "", quotedPrice: "", holdingYears: 10, marketPremium: 0, loanAmount: "", tenureMonths: 84, flatRate: defaultRate(preset.electric) };
 }
 
 export function presetById(id: string): Preset {
-  return presets.presets.find((p) => p.id === id) ?? presets.presets[0]!;
+  return presets.presets.find((p) => p.id === id) ?? DEFAULT_PRESET;
 }
 
 /** A typed positive whole-dollar amount, or undefined when blank or not one. */
@@ -68,7 +71,7 @@ export function nextCarFigures(state: NextCarState, rules: RuleSet, purchaseDate
     price = preset.priceWithCoe + premiumChange + (omv - preset.omv);
     priceBasis = { kind: "lta", quoted: preset.priceWithCoe, premiumChange };
   }
-  const arf = rules.newCarArf({ omv, band: preset.band as "A" | "B" | "C1", electric: preset.electric, registrationDate: purchaseDate });
+  const arf = rules.newCarArf({ omv, band: preset.band as EmissionBand, electric: preset.electric, registrationDate: purchaseDate });
   const sellDate = addYears(purchaseDate, state.holdingYears);
   const floor = rules.deregistrationValue(
     {
@@ -84,7 +87,14 @@ export function nextCarFigures(state: NextCarState, rules: RuleSet, purchaseDate
   return { preset, omv, price, priceBasis, arf, floor, sellDate };
 }
 
-/** The next-car picker, grouped by powertrain. Shown at the top and in the next-car section; both edit the same state. */
+/** LTA's with-COE quote moved to today's premium, rounded to the nearest $1,000 for the picker. */
+function pickerPrice(p: Preset): string {
+  if (p.priceWithCoe === null) return "no price listed";
+  const category = p.category as "A" | "B";
+  return money(Math.round((p.priceWithCoe + latestPremium(category) - presets.quotePremiums[category]) / 1000) * 1000);
+}
+
+/** The next-car picker, grouped by powertrain and sorted by name. Shown at the top and in the next-car section; both edit the same state. */
 export function carSelect(state: NextCarState, onChange: (s: NextCarState) => void, name = "presetId"): HTMLSelectElement {
   return h(
     "select",
@@ -99,7 +109,10 @@ export function carSelect(state: NextCarState, onChange: (s: NextCarState) => vo
       h(
         "optgroup",
         { label: pt[0]!.toUpperCase() + pt.slice(1) },
-        ...presets.presets.filter((p) => p.powertrain === pt).map((p) => h("option", { value: p.id, selected: p.id === state.presetId }, `${p.label} (Cat ${p.category}, band ${p.band})`)),
+        ...presets.presets
+          .filter((p) => p.powertrain === pt)
+          .sort((a, b) => a.label.localeCompare(b.label))
+          .map((p) => h("option", { value: p.id, selected: p.id === state.presetId }, `${p.label} · Cat ${p.category} · ${pickerPrice(p)}`)),
       ),
     ),
   );

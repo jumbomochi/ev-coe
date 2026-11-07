@@ -11,13 +11,16 @@ const figures = (presetId: string, change: object = {}) => nextCarFigures({ ...d
 
 describe("presets match LTA's car-cost table", () => {
   it.each(presets.presets.map((p) => [p.label, p] as const))("%s", (_label, p) => {
-    const row = lta.rows.find((r) => r.model === p.ltaModel);
+    // A few names appear twice in LTA's table with different specs, so OMV picks the row.
+    const row = lta.rows.find((r) => r.model === p.ltaModel && r.omv === p.omv);
     expect(row, `no LTA row "${p.ltaModel}"`).toBeDefined();
-    expect({ omv: p.omv, band: p.band, powertrain: p.powertrain, electric: p.electric }).toEqual({
+    expect({ category: p.category, omv: p.omv, band: p.band, powertrain: p.powertrain, electric: p.electric, priceWithCoe: p.priceWithCoe }).toEqual({
+      category: row!.category,
       omv: row!.omv,
       band: row!.band,
       powertrain: FUEL[row!.fuel],
       electric: row!.fuel === "E",
+      priceWithCoe: row!.priceWithCoe,
     });
   });
 });

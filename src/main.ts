@@ -1,5 +1,5 @@
 import "./style.css";
-import { addMonthsToDate, rulesAt, compareDates } from "./rules/index";
+import { addMonthsToDate, rulesAt, compareDates, type EmissionBand } from "./rules/index";
 import { backtest } from "./model/backtest";
 import { radar } from "./model/radar";
 import { h, longDate } from "./ui/dom";
@@ -85,7 +85,7 @@ function render(): void {
           coe: data.coe.rows,
           rules,
           category: preset.category as "A" | "B",
-          newCar: { omv: next.omv, band: preset.band as "A" | "B" | "C1", electric: preset.electric },
+          newCar: { omv: next.omv, band: preset.band as EmissionBand, electric: preset.electric },
           oldCar: valid
             ? { arfPaid: valid.car.arfPaid, quotaPremiumPaid: valid.car.quotaPremiumPaid, coeExercise: valid.car.coeExercise, renewal: valid.car.renewal }
             : undefined,
