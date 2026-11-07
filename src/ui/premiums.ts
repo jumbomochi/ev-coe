@@ -4,7 +4,7 @@ import { exerciseDate } from "../model/premiums";
 import { addMonths } from "../model/radar";
 import type { Exercise } from "../rules/index";
 import { history } from "./data";
-import { h, longDate, money, signedMoney } from "./dom";
+import { h, longDate, method, money, signedMoney } from "./dom";
 
 type Cat = "A" | "B" | "E";
 
@@ -88,10 +88,23 @@ export function premiumsSection(highlight: "A" | "B", window: { from: string; to
     ].filter(Boolean) as Plot.Markish[],
   });
 
+  // Headline: where the next car's category sits against its own record.
+  const mine = history.premium(latest, highlight)!;
+  const record = exercises.reduce<{ e: Exercise; v: number } | undefined>((a, e) => {
+    const v = history.premium(e, highlight);
+    return v !== undefined && (!a || v > a.v) ? { e, v } : a;
+  }, undefined)!;
+  const below = Math.round((1 - mine / record.v) * 100);
+  const headline =
+    record.v === mine
+      ? `Cat ${highlight} premiums are at a record ${money(mine)}.`
+      : `Cat ${highlight} premiums are ${money(mine)}, ${below === 0 ? "within 1%" : `${below}%`} below their record of ${money(record.v)} (${longDate(exerciseDate(record.e))}).`;
+
   return h(
     "div",
     {},
-    h("h3", {}, `COE premiums, ${longDate(exerciseDate(latest))} exercise`),
+    h("p", { class: "kicker" }, `COE premiums, ${longDate(exerciseDate(latest))} exercise`),
+    h("h3", { class: "takeaway" }, headline),
     tiles,
     h("figure", { class: "chart" }, chart),
     h(
@@ -100,6 +113,6 @@ export function premiumsSection(highlight: "A" | "B", window: { from: string; to
       ...CATEGORIES.map((c) => h("li", {}, h("span", { class: `sw line s-${c.id}` }), `Cat ${c.id}`)),
       window ? h("li", {}, h("span", { class: "sw window" }), "Your window") : null,
     ),
-    h("p", { class: "note" }, "A car's COE category is fixed by its engine size and power, and it bids only in that category (or in Cat E). The premium goes straight into the price, so the same OMV can cost very different amounts in Cat A and Cat B."),
+    method(h("p", {}, "A car's COE category is fixed by its engine size and power, and it bids only in that category (or in Cat E). The premium goes straight into the price, so the same OMV can cost very different amounts in Cat A and Cat B. Data: LTA DataMall COE results.")),
   );
 }

@@ -8,7 +8,7 @@ import type { Strip } from "../model/backtest";
 import { exerciseDate } from "../model/premiums";
 import type { Exercise } from "../rules/index";
 import { history } from "./data";
-import { h, longDate, money, signedMoney } from "./dom";
+import { h, longDate, method, money, signedMoney } from "./dom";
 
 const TITLES: Record<Strip["plan"], string> = {
   "buy-at-deadline": "Buy when your COE expires",
@@ -20,6 +20,7 @@ const TITLES: Record<Strip["plan"], string> = {
 const STROKE: Partial<Record<Strip["plan"], string>> = { "renew-5-then-buy": "var(--p1)", "buy-a-year-early": "var(--p2)", "first-car": "var(--accent)" };
 const SWATCH: Partial<Record<Strip["plan"], string>> = { "renew-5-then-buy": "p1", "buy-a-year-early": "p2", "first-car": "accent" };
 const FROM = "2010-01-01";
+const GERUND: Partial<Record<Strip["plan"], string>> = { "renew-5-then-buy": "renewing for 5 years", "buy-a-year-early": "buying a year early" };
 
 const toDate = (iso: string) => new Date(`${iso}T00:00:00Z`);
 const key = (e: Exercise) => `${e.month}/${e.bidding}`;
@@ -141,9 +142,10 @@ export function plansSection(strips: Strip[], width: number, referenceLabel: str
   return h(
     "div",
     {},
+    h("h3", { class: "takeaway" }, takeaway(strips)),
     h(
       "p",
-      { class: "lede" },
+      { class: "sub" },
       firstCar
         ? "Each point treats one past bidding exercise as your buying month and works out the cost of 10 years of driving on the premiums people actually paid."
         : "Each point treats one past bidding exercise as the day your COE expired and replays the plan on the premiums people actually paid.",
@@ -178,13 +180,25 @@ export function plansSection(strips: Strip[], width: number, referenceLabel: str
           { class: "note" },
           "How to read it: renewing for 5 years means buying 5 years later at whatever the premium is then. It came out cheaper for deadlines at a premium peak (2012-14, when premiums then fell) and dearer for deadlines in a trough (2017-21, before premiums tripled). Buying a year early wins when premiums are rising.",
         ),
-    h(
+    method(
+      h(
       "p",
-      { class: "note" },
+      {},
       `This shows what happened, not what will happen. Replayed from ${longDate(exerciseDate(first.outcomes[0]!.start))} to ${longDate(exerciseDate(first.outcomes.at(-1)!.start))}; latest premium ${longDate(exerciseDate(latest))}. Neighbouring points share most of their years, so they are not independent trials. `,
       `Costs are COE premiums and PQP, plus the next car's ARF less the PARF it keeps (reference car: ${referenceLabel}), per year of road access, in nominal dollars, with today's rules applied to past prices. They exclude the car's price and depreciation, VES/EEAI timing, fuel and insurance.`,
+      ),
     ),
   );
+}
+
+/** One sentence on what history says, from the medians. */
+function takeaway(strips: Strip[]): string {
+  const first = strips[0]!;
+  if (first.plan === "first-car") return `Over ${first.n} past buying months, 10 years of road access cost a median ${money(first.median)} a year.`;
+  const parts = strips
+    .filter((s) => s.relative)
+    .map((s) => `${GERUND[s.plan]} cost a median ${money(Math.abs(Math.round(s.median)))} a year ${s.median >= 0 ? "more" : "less"}`);
+  return `Over ${first.n} past deadlines, ${parts.join(", and ")} than buying when the COE expired.`;
 }
 
 function shortTitle(plan: Strip["plan"]): string {

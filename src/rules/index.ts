@@ -11,7 +11,9 @@ import { coeRebate } from "./coeRebate";
 import { compareDates, parseDate } from "./dates";
 
 /** Calendar helpers on `YYYY-MM-DD` dates, shared so callers never re-implement LTA's date counting. */
-export { addDaysIso as addDays, addYears, compareDates } from "./dates";
+export { addDaysIso as addDays, addMonthsIso as addMonthsToDate, addYears, compareDates } from "./dates";
+/** Gross ARF on an OMV for a COE exercise, used to estimate the ARF an owner paid when it isn't typed in. */
+export { grossArf } from "./arf";
 import { flatRateLoan, loanRules, maxLoan, type FlatRateLoan } from "./loan";
 import { parfRebate } from "./parf";
 import { renewalCategory, renewalOptions, type RenewalOption } from "./renewal";

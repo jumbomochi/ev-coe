@@ -52,6 +52,10 @@ export function addDaysIso(iso: IsoDate, days: number): IsoDate {
   return formatDate(addDays(parseDate(iso), days));
 }
 
+export function addMonthsIso(iso: IsoDate, months: number): IsoDate {
+  return formatDate(addMonths(parseDate(iso), months));
+}
+
 export function addYears(iso: IsoDate, years: number): IsoDate {
   return formatDate(addMonths(parseDate(iso), years * 12));
 }

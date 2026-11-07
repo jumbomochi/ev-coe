@@ -32,6 +32,23 @@ describe("validateCar", () => {
     expect(out.ok && out.value).toMatchObject({ indicativeQp: 27000, car: { quotaPremiumPaid: 27000 } });
   });
 
+  it("needs only the expiry date: registration, ARF and QP are estimated and listed", () => {
+    const out = validateCar({ ...EMPTY_PROFILE, coeExpiryDate: "2028-10-14" }, TODAY, history);
+    expect(out.ok && out.value.car).toMatchObject({ registrationDate: "2018-10-15", coeExercise: { month: "2018-10", bidding: 1 }, arfPaid: 20000, quotaPremiumPaid: 27000 });
+    expect(out.ok && out.value.estimates.map((e) => e.field)).toEqual(["registrationDate", "arfPaid", "quotaPremiumPaid"]);
+  });
+
+  it("estimates a typical Cat B car's ARF on the tiers of its COE exercise", () => {
+    const out = validateCar({ ...good, category: "B", arfPaid: "" }, TODAY, history);
+    // Pre-2023 tiers: 100% of the first $20,000 + 140% of the next $20,000.
+    expect(out.ok && out.value.car.arfPaid).toBe(48000);
+  });
+
+  it("estimates a renewed car's PQP from the month it was renewed, and needs no ARF", () => {
+    const out = validateCar({ ...EMPTY_PROFILE, coeExpiryDate: "2028-10-14", renewal: "5" }, TODAY, history, (month) => (month === "2023-10" ? 100001 : undefined));
+    expect(out.ok && out.value.car).toMatchObject({ registrationDate: "2013-10-15", arfPaid: 0, quotaPremiumPaid: 50001, renewal: { termYears: 5 } });
+  });
+
   it("asks for the actual QP when the registration month predates the COE history", () => {
     const out = validateCar({ ...good, registrationDate: "2005-06-01", qpMode: "indicative" }, TODAY, history);
     expect(out.ok).toBe(false);
@@ -44,7 +61,8 @@ describe("validateCar", () => {
     ["expired COE", { registrationDate: "2015-01-01", coeExpiryDate: "2025-01-01" }, "coeExpiryDate"],
     ["impossible date", { coeExpiryDate: "2028-02-30" }, "coeExpiryDate"],
     ["negative ARF", { arfPaid: "-5" }, "arfPaid"],
-    ["missing QP", { quotaPremiumPaid: "" }, "quotaPremiumPaid"],
+    ["zero QP", { quotaPremiumPaid: "0" }, "quotaPremiumPaid"],
+    ["expiry more than 10 years away", { registrationDate: "", coeExpiryDate: "2037-01-01" }, "coeExpiryDate"],
     ["half-filled exercise", { coeMonth: "2018-10" }, "coeMonth"],
   ])("rejects %s with a message on the field", (_name, change, field) => {
     const out = validateCar({ ...good, ...change }, TODAY, history);

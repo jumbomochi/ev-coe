@@ -8,14 +8,6 @@
 - **Context:** decided in /plan-eng-review 2026-10-31 (D21). The PDF lives at onemotoring.lta.gov.sg (Buying › Car Cost Update). Start next to `scripts/fetch-data.ts` and reuse its guard.
 - **Depends on / blocked by:** v1 launch; the D12 guard pattern.
 
-## Shareable scenario links (fragment only)
-- **What:** a "Share" button that encodes the car profile in the URL fragment (`#...`).
-- **Why:** people compare scenarios with a partner or friend.
-- **Pros:** sharing with no backend; the fragment never reaches the server or GitHub Pages logs.
-- **Cons:** anyone with the link sees the figures, so it needs a clear warning. Never use query parameters (`?a=b`): they land in host access logs and break "never uploaded".
-- **Context:** design doc Open Question 8; eng review D22.
-- **Depends on / blocked by:** v1 profile storage (D13).
-
 ## Radar: count renewed-COE and early-deregistration returns
 - **What:** add COEs returning at year 15 (5-year renewals), at year 20 (10-year renewals) and from early deregistrations to the supply radar.
 - **Why:** v1 counts only cars reaching 10 years and states the exclusion; these flows add supply the bars miss.

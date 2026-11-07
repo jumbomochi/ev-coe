@@ -50,3 +50,8 @@ export function field(label: string, input: HTMLElement, error?: string, hint?: 
     error ? h("span", { class: "error", role: "alert" }, error) : null,
   );
 }
+
+/** Method notes, folded away under the chart they explain. */
+export function method(...children: Child[]): HTMLDetailsElement {
+  return h("details", { class: "method" }, h("summary", {}, "How we worked this out"), h("div", {}, ...children));
+}

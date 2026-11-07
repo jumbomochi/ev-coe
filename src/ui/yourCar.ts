@@ -4,7 +4,7 @@ import { field, h, longDate, money, monthLabel, source } from "./dom";
 import { latestPqp } from "./data";
 import type { Errors, Profile, ValidCar } from "./profile";
 
-export function yourCarForm(profile: Profile, errors: Errors, onChange: (p: Profile) => void): HTMLElement {
+export function yourCarForm(profile: Profile, errors: Errors, onChange: (p: Profile) => void, carSelect: HTMLElement, estimated: number): HTMLElement {
   const set = <K extends keyof Profile>(key: K, value: Profile[K]) => onChange({ ...profile, [key]: value });
   const input = (key: keyof Profile, type: string, extra: Record<string, string> = {}) =>
     h("input", {
@@ -26,8 +26,8 @@ export function yourCarForm(profile: Profile, errors: Errors, onChange: (p: Prof
     "div",
     { class: "toggle", role: "radiogroup", "aria-label": "Do you own a car now?" },
     ...([
-      ["replace", "Yes, I'm replacing it"],
-      ["first", "No, this is my first car"],
+      ["replace", "I own a car"],
+      ["first", "This is my first car"],
     ] as const).map(([value, label]) =>
       h("button", { type: "button", role: "radio", "aria-checked": profile.mode === value ? "true" : "false", class: profile.mode === value ? "on" : "", onclick: () => set("mode", value) }, label),
     ),
@@ -38,54 +38,48 @@ export function yourCarForm(profile: Profile, errors: Errors, onChange: (p: Prof
       "div",
       { class: "form" },
       modeToggle,
-      field("When do you plan to buy?", input("targetMonth", "month"), errors.targetMonth, "Used to mark your window on the supply chart."),
+      h("div", { class: "quick" }, field("When do you plan to buy?", input("targetMonth", "month"), errors.targetMonth), field("Car", carSelect)),
     );
   }
 
   const renewed = profile.renewal !== "none";
+  const detailErrors = (["registrationDate", "arfPaid", "quotaPremiumPaid", "coeMonth"] as const).some((k) => errors[k]);
   return h(
     "div",
     { class: "form" },
     modeToggle,
-    h("p", { class: "hint" }, "From your vehicle log card or OneMotoring › Vehicle Hub. Saved only in this browser."),
     h(
       "div",
-      { class: "grid" },
-      field("Registration date", input("registrationDate", "date"), errors.registrationDate),
-      field("COE expiry date", input("coeExpiryDate", "date"), errors.coeExpiryDate),
+      { class: "quick" },
+      field("When does your COE expire?", input("coeExpiryDate", "date"), errors.coeExpiryDate, "On your log card, or OneMotoring › Vehicle Hub."),
       field("COE category", select("category", [["A", "Cat A"], ["B", "Cat B"], ["E", "Cat E (open)"]])),
       profile.category === "E" ? field("Your car's own category", select("equivalentCategory", [["A", "Cat A"], ["B", "Cat B"]]), undefined, "Cat E cars renew at this category's PQP.") : null,
-      field("ARF paid", input("arfPaid", "text", { inputmode: "numeric", placeholder: "e.g. 20,000" }), errors.arfPaid, "Net of any CEVS/VES/EEAI rebate."),
-      field("COE already renewed?", select("renewal", [["none", "No, original COE"], ["10", "Yes, for 10 years"], ["5", "Yes, for 5 years"]])),
-      renewed
-        ? field("PQP you paid to renew", input("quotaPremiumPaid", "text", { inputmode: "numeric" }), errors.quotaPremiumPaid)
-        : field(
-            "QP you paid",
-            h(
-              "div",
-              { class: "inline" },
-              select("qpMode", [["actual", "I'll enter it"], ["indicative", "Estimate it for me"]]),
-              profile.qpMode === "actual" ? input("quotaPremiumPaid", "text", { inputmode: "numeric", placeholder: "e.g. 26,000" }) : null,
-            ),
-            errors.quotaPremiumPaid,
-          ),
+      field("Replacing it with", carSelect),
     ),
     h(
       "details",
-      { class: "advanced" },
-      h("summary", {}, "COE bought in a different month from registration?"),
+      { class: "advanced", open: detailErrors },
+      h("summary", {}, estimated ? `${estimated} figure${estimated === 1 ? " is" : "s are"} estimated. Add details from your log card for exact numbers` : "Details from your log card"),
       h(
         "div",
         { class: "grid" },
-        field("COE bidding month", input("coeMonth", "month"), errors.coeMonth, "Picks your PARF schedule (it changed in Feb 2023 and Feb 2026)."),
+        field("Registration date", input("registrationDate", "date"), errors.registrationDate, "Blank: 10 years before expiry."),
+        field("ARF paid", input("arfPaid", "text", { inputmode: "numeric", placeholder: "Blank: a typical car's" }), errors.arfPaid, "Net of any CEVS/VES/EEAI rebate."),
+        field("COE already renewed?", select("renewal", [["none", "No, original COE"], ["10", "Yes, for 10 years"], ["5", "Yes, for 5 years"]])),
+        field(
+          renewed ? "PQP you paid to renew" : "QP you paid",
+          input("quotaPremiumPaid", "text", { inputmode: "numeric", placeholder: "Blank: that month's premium" }),
+          errors.quotaPremiumPaid,
+        ),
+        field("COE bidding month", input("coeMonth", "month"), errors.coeMonth, "Only if the COE was bought in a different month from registration. Picks your PARF schedule."),
         field("Exercise", select("coeBidding", [["", "Same as registration"], ["1", "1st exercise"], ["2", "2nd exercise"]])),
       ),
     ),
   );
 }
 
-export function yourCarResults(valid: ValidCar | undefined, rules: RuleSet): HTMLElement {
-  if (!valid) return h("div", { class: "results empty" }, h("p", {}, "Fill in your car to see your window, what you'd get back today, and what renewing costs."));
+/** The figures behind the answer: what LTA pays back, what renewing costs, and what was estimated. */
+export function yourCarResults(valid: ValidCar, rules: RuleSet): HTMLElement {
   const { car } = valid;
   const today = rules.asOf;
   const now = rules.deregistrationValue(car, today);
@@ -100,12 +94,12 @@ export function yourCarResults(valid: ValidCar | undefined, rules: RuleSet): HTM
     { class: "results" },
     h("div", { class: "kicker" }, "Your window"),
     h("div", { class: "big" }, `Now → ${longDate(car.coeExpiryDate)}`),
-    h("p", { class: "sub" }, `${monthsLeft} months until your COE expires.`),
+    h("p", { class: "sub" }, `${monthsLeft} months until your COE expires (registered ${longDate(car.registrationDate)}).`),
 
     h("div", { class: "kicker" }, "Deregister today"),
     h("div", { class: "big" }, money(now.total)),
     h("p", { class: "sub" }, `PARF ${money(now.parf)} + COE rebate ${money(now.coeRebate)}`, car.renewal ? " (no PARF: the COE was renewed)." : "."),
-    valid.indicativeQp !== undefined ? h("p", { class: "estimate" }, `Estimate: QP taken as ${money(valid.indicativeQp)}, the average premium in your COE month. Yours may differ if it was bid earlier.`) : null,
+    ...valid.estimates.map((e) => h("p", { class: "estimate" }, `Estimate: ${e.note}`)),
 
     h("div", { class: "kicker" }, "Renew past expiry"),
     options.length === 0

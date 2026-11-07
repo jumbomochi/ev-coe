@@ -84,13 +84,12 @@ export function nextCarFigures(state: NextCarState, rules: RuleSet, purchaseDate
   return { preset, omv, price, priceBasis, arf, floor, sellDate };
 }
 
-export function nextCarSection(state: NextCarState, rules: RuleSet, purchaseDate: string, onChange: (s: NextCarState) => void): HTMLElement {
-  const set = <K extends keyof NextCarState>(key: K, value: NextCarState[K]) => onChange({ ...state, [key]: value });
-  const f = nextCarFigures(state, rules, purchaseDate);
-
-  const presetSelect = h(
+/** The next-car picker, grouped by powertrain. Shown at the top and in the next-car section; both edit the same state. */
+export function carSelect(state: NextCarState, onChange: (s: NextCarState) => void, name = "presetId"): HTMLSelectElement {
+  return h(
     "select",
     {
+      name,
       onchange: (e: Event) => {
         const p = presetById((e.target as HTMLSelectElement).value);
         onChange({ ...state, presetId: p.id, omvOverride: "", quotedPrice: "", flatRate: defaultRate(p.electric) });
@@ -100,10 +99,17 @@ export function nextCarSection(state: NextCarState, rules: RuleSet, purchaseDate
       h(
         "optgroup",
         { label: pt[0]!.toUpperCase() + pt.slice(1) },
-        ...presets.presets.filter((p) => p.powertrain === pt).map((p) => h("option", { value: p.id, selected: p.id === f.preset.id }, `${p.label} (Cat ${p.category}, band ${p.band})`)),
+        ...presets.presets.filter((p) => p.powertrain === pt).map((p) => h("option", { value: p.id, selected: p.id === state.presetId }, `${p.label} (Cat ${p.category}, band ${p.band})`)),
       ),
     ),
   );
+}
+
+export function nextCarSection(state: NextCarState, rules: RuleSet, purchaseDate: string, onChange: (s: NextCarState) => void): HTMLElement {
+  const set = <K extends keyof NextCarState>(key: K, value: NextCarState[K]) => onChange({ ...state, [key]: value });
+  const f = nextCarFigures(state, rules, purchaseDate);
+
+  const presetSelect = carSelect(state, onChange);
 
   const holding = h(
     "div",
